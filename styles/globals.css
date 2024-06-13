@@ -1,0 +1,53 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: lightgray;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(32, 32, 32);
+}
+
+.navbar-item img {
+  max-height: 3rem;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#edit-btn {
+  background: none;
+  border-color: #74C0FC;
+}
+
+#del-btn {
+  background: none;
+  border-color: #74C0FC;
+}
+
+#view-btn {
+  background: none;
+  border-color: #74C0FC;
+}
+
+#add-btn {
+  background: none;
+  border-color: #74C0FC;
+  color: #74C0FC;
+}

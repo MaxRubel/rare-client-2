@@ -1,0 +1,13 @@
+.btn-nav-row {
+  display: flex;
+  gap: 10px;
+
+}
+
+.nav-button {
+  height: 44px;
+  background-color: black;
+  border: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

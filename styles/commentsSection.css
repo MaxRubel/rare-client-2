@@ -1,0 +1,9 @@
+.down20{
+    margin-top: 50px;
+}
+
+.comments-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}

@@ -1,0 +1,16 @@
+.page-grid-2-cat {
+  margin-top: 75px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.create-cat-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
