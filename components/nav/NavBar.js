@@ -13,9 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Logo from './rare.jpeg';
 import { useAuth } from '../../utils/data/authContext';
+import { signOut } from '../../utils/data/AuthManager';
 
 function AppNavBar() {
-  const { user } = useAuth();
+  const { oAuthUser, user } = useAuth();
   const router = useRouter();
 
   const catManager = () => {
@@ -61,15 +62,13 @@ function AppNavBar() {
               ''
             )}
 
-            {user ? (
+            {oAuthUser ? (
               <div className="btn-nav-row">
                 <Button
                   type="button"
-                  className="nav-button"
+                  className="btn btn-danger"
                   style={{ marginLeft: '10px' }}
-                  onClick={() => {
-                    router.push('/login');
-                  }}
+                  onClick={signOut}
                 >
                   Logout
                 </Button>

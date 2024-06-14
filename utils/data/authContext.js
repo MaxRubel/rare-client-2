@@ -15,16 +15,16 @@ const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext'; // Context object accepts a displayName string property. React DevTools uses this string to determine what to display for the context. https://reactjs.org/docs/context.html#contextdisplayname
 
 const AuthProvider = (props) => {
-  const [rareUser, setRareUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [oAuthUser, setOAuthUser] = useState(null);
 
   // there are two types of users:
   //        - oAuth (logged in with firebase auth)
-  //        - rareUser (registered with rare/in the Django database)
+  //        - user (registered with rare/in the Django database)
 
   const updateUser = useMemo(
     () => (uid) => checkUser(uid).then((userData) => {
-      setRareUser({ fbUser: oAuthUser, ...userData });
+      setUser({ fbUser: oAuthUser, ...userData });
     }),
     [oAuthUser],
   );
@@ -40,7 +40,7 @@ const AuthProvider = (props) => {
           } else {
             userObj = { fbUser, uid: fbUser.uid, ...userData };
           }
-          setRareUser(userObj);
+          setUser(userObj);
         });
       } else {
         setOAuthUser(false);
@@ -51,14 +51,14 @@ const AuthProvider = (props) => {
   const value = useMemo(
     // https://reactjs.org/docs/hooks-reference.html#usememo
     () => ({
-      rareUser,
+      user,
       oAuthUser,
       updateUser,
       userLoading: oAuthUser === null,
       // as long as user === null, will be true
       // As soon as the user value !== null, value will be false
     }),
-    [rareUser, oAuthUser, updateUser],
+    [user, oAuthUser, updateUser],
   );
 
   return <AuthContext.Provider value={value} {...props} />;
