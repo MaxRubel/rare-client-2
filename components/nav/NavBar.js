@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 import {
   Button,
   Container,
@@ -13,8 +12,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Logo from './rare.jpeg';
+import { useAuth } from '../../utils/data/authContext';
 
-function AppNavBar({ token, setToken }) {
+function AppNavBar() {
+  const { user } = useAuth();
   const router = useRouter();
 
   const catManager = () => {
@@ -47,7 +48,7 @@ function AppNavBar({ token, setToken }) {
             </Button>
           </Link>
           <Nav className="me-auto">
-            {token ? (
+            {user ? (
               <div className="btn-nav-row">
                 <Button className="nav-button" onClick={userPosts}> My Posts </Button>
                 <Button className="nav-button" onClick={profilePage}>My Profile</Button>
@@ -60,14 +61,13 @@ function AppNavBar({ token, setToken }) {
               ''
             )}
 
-            {token ? (
+            {user ? (
               <div className="btn-nav-row">
                 <Button
                   type="button"
                   className="nav-button"
                   style={{ marginLeft: '10px' }}
                   onClick={() => {
-                    setToken('');
                     router.push('/login');
                   }}
                 >
@@ -90,9 +90,4 @@ function AppNavBar({ token, setToken }) {
     </Navbar>
   );
 }
-
-AppNavBar.propTypes = {
-  token: PropTypes.string.isRequired,
-  setToken: PropTypes.func.isRequired,
-};
 export default AppNavBar;
