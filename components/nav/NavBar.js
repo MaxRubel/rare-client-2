@@ -16,7 +16,7 @@ import { useAuth } from '../../utils/data/authContext';
 import { signOut } from '../../utils/data/AuthManager';
 
 function AppNavBar() {
-  const { oAuthUser, rareUser } = useAuth();
+  const { oAuthUser, user } = useAuth();
   const router = useRouter();
 
   const catManager = () => {
@@ -49,7 +49,7 @@ function AppNavBar() {
             </Button>
           </Link>
           <Nav className="me-auto">
-            {rareUser ? (
+            {user ? (
               <div className="btn-nav-row">
                 <Button className="nav-button" onClick={userPosts}> My Posts </Button>
                 <Button className="nav-button" onClick={profilePage}>My Profile</Button>

@@ -4,6 +4,7 @@ import 'firebase/auth';
 
 const checkUser = (uid) =>
   new Promise((resolve, reject) => {
+    console.log('updating');
     fetch('http://localhost:8000/checkuser', {
       method: 'POST',
       body: JSON.stringify({
