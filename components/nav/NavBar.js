@@ -13,9 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Logo from './rare.jpeg';
 import { useAuth } from '../../utils/data/authContext';
+import { signOut } from '../../utils/data/AuthManager';
 
 function AppNavBar() {
-  const { user } = useAuth();
+  const { oAuthUser, rareUser } = useAuth();
   const router = useRouter();
 
   const catManager = () => {
@@ -48,7 +49,7 @@ function AppNavBar() {
             </Button>
           </Link>
           <Nav className="me-auto">
-            {user ? (
+            {rareUser ? (
               <div className="btn-nav-row">
                 <Button className="nav-button" onClick={userPosts}> My Posts </Button>
                 <Button className="nav-button" onClick={profilePage}>My Profile</Button>
@@ -61,15 +62,13 @@ function AppNavBar() {
               ''
             )}
 
-            {user ? (
+            {oAuthUser ? (
               <div className="btn-nav-row">
                 <Button
                   type="button"
-                  className="nav-button"
+                  className="btn btn-danger"
                   style={{ marginLeft: '10px' }}
-                  onClick={() => {
-                    router.push('/login');
-                  }}
+                  onClick={signOut}
                 >
                   Logout
                 </Button>
