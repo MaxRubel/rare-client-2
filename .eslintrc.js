@@ -24,12 +24,7 @@ module.exports = {
       },
     ],
     'react/jsx-one-expression-per-line': [0],
-    'no-console': [
-      1,
-      {
-        allow: ['error', 'warn'],
-      },
-    ],
+    'no-console': 'off',
     'comma-dangle': ['error'],
     'no-debugger': 1,
     'linebreak-style': 0,

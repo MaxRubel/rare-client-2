@@ -1,7 +1,7 @@
-const endpoint = 'http://localhost:8088';
+const endpoint = 'http://localhost:8000';
 
 const getAllPosts = () => new Promise((resolve, reject) => {
-  fetch('http://localhost:8088/posts', {
+  fetch(`${endpoint}/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

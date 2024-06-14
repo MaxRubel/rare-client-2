@@ -1,17 +1,7 @@
-const getUserByUsername = (username) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8088/users?username=${username}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
-    .catch(reject);
-});
+const endppoint = 'http://localhost:8000';
 
 const getSingleUser = (id) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8088/users/${id}`, {
+  fetch(`${endppoint}/users/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -22,4 +12,17 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getUserByUsername, getSingleUser };
+const createNewUser = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endppoint}/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+export { getSingleUser, createNewUser };
