@@ -52,6 +52,7 @@ export default function ReactionBar({ postId }) {
       setHasReacted(data.some((item) => item.user_id === Number(userId)));
       calculateReactions(data);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update, postId]);
 
   const handleMakeNewPostReaction = (reaction) => {
