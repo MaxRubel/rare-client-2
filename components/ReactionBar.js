@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import {
@@ -47,13 +48,13 @@ export default function ReactionBar({ postId }) {
     }
   };
 
-  // useEffect(() => {
-  //   getReactionsOfPost(postId).then((data) => {
-  //     setHasReacted(data.some((item) => item.user_id === Number(userId)));
-  //     calculateReactions(data);
-  //   });
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [update, postId]);
+  useEffect(() => {
+    getReactionsOfPost(postId).then((data) => {
+      setHasReacted(data.some((item) => item.user_id === Number(userId)));
+      calculateReactions(data);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update, postId]);
 
   const handleMakeNewPostReaction = (reaction) => {
     let reactionId;
