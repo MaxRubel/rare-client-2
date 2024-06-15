@@ -1,4 +1,4 @@
-const userEndpoint = 'http://localhost:8088/users';
+const userEndpoint = 'http://localhost:8000/users';
 
 const getUsers = () => new Promise((resolve, reject) => {
   fetch(`${userEndpoint}`, {
