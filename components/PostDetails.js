@@ -13,7 +13,7 @@ export default function PostDeatil({ postId }) {
   useEffect(() => {
     getSinglePost(postId).then((data) => {
       setPost(data);
-      getSingleUser(data.user_id).then((authorData) => [
+      getSingleUser(data.rare_user_id).then((authorData) => [
         setAuthor(authorData),
       ]);
     });
@@ -26,11 +26,11 @@ export default function PostDeatil({ postId }) {
       </div>
       <div className="post-details center-post">
         <div><h1>{post?.title}</h1></div>
-        <div>{post?.image}</div>
+        <div>{post?.image_url}</div>
         <div className="post-row">
           <Link passHref href="/">
             <div style={{ cursor: 'pointer' }}>
-              By: {author?.username}
+              By: {author?.first_name}
             </div>
           </Link>
           <div>

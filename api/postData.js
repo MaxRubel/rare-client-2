@@ -60,8 +60,8 @@ const updatePost = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getPostByUserId = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/posts?user_id=${id}`, {
+const getPostByUserId = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/posts?uid=${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

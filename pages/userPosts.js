@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import { getPostByUserId } from '../api/postData';
 import PostCard from '../components/PostCard';
+import { useAuth } from '../utils/data/authContext';
 
 function UserPosts() {
   const [posts, setPosts] = useState([]);
 
-  const userId = localStorage.getItem('auth_token');
+  const { user } = useAuth();
 
   const getAllPosts = () => {
-    getPostByUserId(userId).then(setPosts);
+    getPostByUserId(user.uid).then(setPosts);
   };
 
   useEffect(() => {
     getAllPosts();
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
