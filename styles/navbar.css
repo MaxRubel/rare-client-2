@@ -4,10 +4,17 @@
 
 }
 
+
 .nav-button {
   height: 44px;
-  background-color: black;
-  border: 0px;
+  background-color: transparent;
+  border: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: white;
+}
+
+.nav-button:hover {
+  transition: all ease 1.4s;
+  color: lightblue;
 }

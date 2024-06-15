@@ -19,12 +19,12 @@ export default function CategoryManager() {
     <div className="centered">
       <div className="page-grid-2-cat">
         <div>
+          <CategoryForm onUpdate={onUpdate} />
+        </div>
+        <div>
           {cats.map((cat) => (
             <CategoryCard cat={cat} key={cat.id} />
           ))}
-        </div>
-        <div>
-          <CategoryForm onUpdate={onUpdate} />
         </div>
       </div>
     </div>

@@ -33,30 +33,30 @@ function AppNavBar() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Container>
-        <Image src={Logo} height="100px" width="100px" alt="Rare Logo" />
+        <Image src={Logo} height="80px" width="80px" alt="Rare Logo" />
         <Link passHref href="/">
-          <Navbar.Brand>
+          <div style={{ color: 'white', padding: '15px' }}>
             <h2 className="title is-4"> Rare Publishing </h2>
-          </Navbar.Brand>
+          </div>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Link href="/post/new" passHref>
-            <Button id="add-btn">
+            <Button id="add-btn" style={{ marginRight: '9px' }}>
               <FontAwesomeIcon icon={faPlus} fade style={{ color: '#74C0FC' }} /> Post
             </Button>
           </Link>
           <Nav className="me-auto">
             {user ? (
               <div className="btn-nav-row">
-                <Button className="nav-button" onClick={userPosts}> My Posts </Button>
-                <Button className="nav-button" onClick={profilePage}>My Profile</Button>
-                <Button className="nav-button" onClick={catManager}>
+                <button type="button" className="nav-button" onClick={userPosts}> My Posts </button>
+                <button type="button" className="nav-button" onClick={profilePage}>My Profile</button>
+                <button type="button" className="nav-button" onClick={catManager}>
                   Category Manager
-                </Button>
-                <Button className="nav-button" onClick={tagManager}>Tag Manager</Button>
+                </button>
+                <button type="button" className="nav-button" onClick={tagManager}>Tag Manager</button>
               </div>
             ) : (
               ''

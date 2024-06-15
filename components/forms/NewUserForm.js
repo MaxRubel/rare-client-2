@@ -37,7 +37,6 @@ export default function NewUserForm({ user }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!update) {
-      console.log('create');
       createNewUser(formInput).then(() => {
         updateUser(oAuthUser.uid).then(() => {
           router.push('/');
@@ -55,9 +54,9 @@ export default function NewUserForm({ user }) {
   return (
     <>
       {!user?.id && (
-      <Button type="button" size="lg" className="btn-danger" onClick={signOut}>
-        Sign Out
-      </Button>
+        <Button type="button" size="lg" className="btn-danger" onClick={signOut}>
+          Sign Out
+        </Button>
       )}
       <form className="new-user-form" onSubmit={handleSubmit}>
         {update ? (
@@ -129,10 +128,21 @@ export default function NewUserForm({ user }) {
         </div>
 
         <div style={{ marginTop: '20px' }}>
-          <div className="control">
+          <div style={{ display: 'flex', gap: '10px' }}>
             <button className="btn btn-primary" type="submit">
               Submit
             </button>
+            {update && (
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={() => {
+                  router.push('/profilePage');
+                }}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </div>
       </form>
