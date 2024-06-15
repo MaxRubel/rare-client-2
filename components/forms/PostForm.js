@@ -6,13 +6,14 @@ import { createPost, updatePost } from '../../api/postData';
 import { getAllCategories } from '../../api/categories';
 import getDate from '../postDate';
 import { getAllTags } from '../../api/tags';
+import { useAuth } from '../../utils/data/authContext';
 
 const initialState = {
   title: '',
   imageUrl: '',
   category: {},
   content: '',
-  tagIds: [],
+  tags: [],
 };
 
 function PostForm({ obj }) {
@@ -22,7 +23,7 @@ function PostForm({ obj }) {
   const [selectedTags, setSelectedTags] = useState([]);
 
   const router = useRouter();
-  const userId = localStorage.getItem('auth_token');
+  const { user } = useAuth();
 
   useEffect(() => {
     if (obj?.id) setFormInput({ ...obj, category: obj.category.id });
@@ -54,13 +55,26 @@ function PostForm({ obj }) {
     }));
   };
 
+  const selectChange = (e) => {
+    const id = Number(e.target.value);
+    const arrCopy = [...selectedTags];
+    const index = arrCopy.indexOf(id);
+
+    if (index > -1) {
+      arrCopy.splice(index, 1);
+    } else {
+      arrCopy.push(Number(id));
+    }
+    setSelectedTags(arrCopy);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj?.id) {
       updatePost({ ...formInput, tags: selectedTags }).then(() => router.push('/'));
     } else {
       const payload = {
-        ...formInput, user_id: userId, publicationDate: getDate(), tags: selectedTags,
+        ...formInput, uid: user.uid, publicationDate: getDate(), tags: selectedTags,
       };
       createPost(payload).then(() => router.push('/'));
     }
@@ -96,10 +110,10 @@ function PostForm({ obj }) {
         <FloatingLabel controlId="floatingSelect" label="Category">
           <Form.Select
             aria-label="Category"
-            name="category_id"
+            name="category"
             onChange={handleChange}
             className="mb-3"
-            value={formInput.category_id}
+            value={formInput.category}
           >
             <option value="">Select applicable category</option>
             {
@@ -115,20 +129,18 @@ function PostForm({ obj }) {
           </Form.Select>
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingSelect" label="Tags">
-          <Form.Select
-            aria-label="Tags"
-            name="tagIds"
-            onChange={handleChange}
-            className="mb-3"
-            value={formInput.tagIds}
-          >
-            <select multiple value={selectedTags} onChange={handleChange}>
-              {tags.map((tag) => (
-                <option key={tag.id} value={tag.id}>{tag.tag}</option>
-              ))}
-            </select>
-          </Form.Select>
+        <FloatingLabel
+          controlId="floatingSelect"
+          label="Tags"
+          name="tags"
+          className="mb-3"
+          value={formInput.tags}
+        >
+          <select multiple value={selectedTags} onChange={selectChange}>
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>{tag.tag}</option>
+            ))}
+          </select>
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput1" label="Post Content" className="mb-3">
@@ -156,7 +168,7 @@ PostForm.propTypes = {
     content: PropTypes.string,
     category: PropTypes.string,
     id: PropTypes.string,
-    tags: PropTypes.forEach(
+    tags: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
         tag: PropTypes.string,
