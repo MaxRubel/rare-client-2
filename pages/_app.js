@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import '../styles/forms.css';
+import '../styles/navbar.css';
+import '../styles/categoryManager.css';
 
 import ViewDirectorBasedOnUserAuthStatus from '../utils/data/ViewDirector';
 import { AuthProvider } from '../utils/data/authContext';
