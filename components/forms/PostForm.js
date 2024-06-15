@@ -10,7 +10,7 @@ import { useAuth } from '../../utils/data/authContext';
 
 const initialState = {
   title: '',
-  imageUrl: '',
+  image_url: '',
   category: {},
   content: '',
   tags: [],
@@ -57,6 +57,9 @@ function PostForm({ obj }) {
 
   const selectChange = (e) => {
     const id = Number(e.target.value);
+    if (id === 0) {
+      return;
+    }
     const arrCopy = [...selectedTags];
     const index = arrCopy.indexOf(id);
 
@@ -99,9 +102,9 @@ function PostForm({ obj }) {
         <FloatingLabel controlId="floatingInput2" label="Post Image" className="mb-3">
           <Form.Control
             type="url"
-            placeholder="Enter an image url"
+            placeholder="imageUrl"
             name="imageUrl"
-            value={formInput.imageUrl}
+            value={formInput.image_url}
             onChange={handleChange}
             required
           />
@@ -137,7 +140,7 @@ function PostForm({ obj }) {
           value={formInput.tags}
         >
           <>
-            <select multiple value={selectedTags} onChange={selectChange} className="select-style">
+            <select multiple value={selectedTags} onClick={selectChange} className="select-style">
               {tags.map((tag) => (
                 <option key={tag.id} value={tag.id}>{tag.tag}</option>
               ))}
@@ -164,6 +167,7 @@ function PostForm({ obj }) {
 }
 
 PostForm.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   obj: PropTypes.shape({
     title: PropTypes.string,
     imageUrl: PropTypes.string,
@@ -176,7 +180,7 @@ PostForm.propTypes = {
         tag: PropTypes.string,
       }),
     ),
-  }).isRequired,
+  }),
 };
 
 export default PostForm;

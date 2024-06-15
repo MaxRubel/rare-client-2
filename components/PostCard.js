@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faTrashCan, faEye } from '@fortawesome/free-solid-svg-icons';
 import { deletePost } from '../api/postData';
+import { useAuth } from '../utils/data/authContext';
 
 function PostCard({ postObj, onUpdate }) {
-  const userId = localStorage.getItem('auth_token');
+  const { user } = useAuth();
 
   const deleteThisPost = () => {
     if (window.confirm(`Delete ${postObj.title}?`)) {
@@ -22,7 +23,7 @@ function PostCard({ postObj, onUpdate }) {
       <Card.Title>{postObj.title} Publication Date: {postObj.publication_date}</Card.Title>
       <Card.Img src={postObj.image_url} alt={postObj.title} style={{ minHeight: '300px ' }} />
       <Card.Body>
-        { userId == postObj.user_id ? (
+        { user.uid == postObj.rare_user.uid ? (
           <>
             <Link href={`/post/edit/${postObj.id}`} passHref>
               <Button id="edit-btn">
@@ -52,9 +53,9 @@ function PostCard({ postObj, onUpdate }) {
 PostCard.propTypes = {
   postObj: PropTypes.shape({
     title: PropTypes.string,
-    publication_date: PropTypes.number,
+    publication_date: PropTypes.string,
     image_url: PropTypes.string,
-    user_id: PropTypes.number,
+    rare_user: PropTypes.number,
     id: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
