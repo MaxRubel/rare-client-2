@@ -25,7 +25,7 @@ export default function CategoryManager() {
         </div>
         <div>
           {cats.map((cat) => (
-            <CategoryCard cat={cat} key={cat.id} />
+            <CategoryCard cat={cat} key={cat.id} onUpdate={onUpdate} />
           ))}
         </div>
       </div>
