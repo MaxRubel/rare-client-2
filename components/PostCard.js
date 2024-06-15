@@ -20,7 +20,8 @@ function PostCard({ postObj, onUpdate }) {
 
   return (
     <Card id="post-styling">
-      <Card.Title>{postObj.title} Publication Date: {postObj.publication_date}</Card.Title>
+      <Card.Title><h2>{postObj.title} </h2></Card.Title>
+      <div><h5>Publication Date: {postObj.publication_date}</h5></div>
       <Card.Img src={postObj.image_url} alt={postObj.title} style={{ minHeight: '300px ' }} />
       <Card.Body>
         { user.uid == postObj.rare_user.uid ? (

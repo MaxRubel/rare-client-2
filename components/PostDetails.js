@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Image } from 'react-bootstrap';
 import { getSinglePost } from '../api/postData';
 import { getSingleUser } from '../api/users';
 import ReactionBar from './ReactionBar';
+import TagCard from './TagCard';
 
 // eslint-disable-next-line react/prop-types
 export default function PostDeatil({ postId }) {
-  const [post, setPost] = useState({});
-  const [author, setAuthor] = useState({});
+  const [post, setPost] = useState(null);
+  const [author, setAuthor] = useState(null);
 
   useEffect(() => {
     getSinglePost(postId).then((data) => {
@@ -22,15 +24,16 @@ export default function PostDeatil({ postId }) {
   return (
     <div className="post-container">
       <div className="centered">
-        margin
+        {/* margin */}
       </div>
       <div className="post-details center-post">
         <div><h1>{post?.title}</h1></div>
-        <div>{post?.image_url}</div>
+        <Image src={post?.image_url} alt="Post image" />
+
         <div className="post-row">
           <Link passHref href="/">
             <div style={{ cursor: 'pointer' }}>
-              By: {author?.first_name}
+              By: {author?.first_name} {author?.last_name}
             </div>
           </Link>
           <div>
@@ -40,10 +43,17 @@ export default function PostDeatil({ postId }) {
             <ReactionBar postId={postId} />
           </div>
         </div>
-        <div>{post?.content}</div>
+        <div className="post-content-post">
+          <div className="posted-on-details">
+            posted on: {post?.publication_date}
+          </div>
+          <div style={{ marginTop: '20px' }}>{post?.content}</div>
+        </div>
       </div>
       <div className="centered">
-        tags
+        {post?.tags.map((tag) => (
+          <TagCard tag={tag} key={tag.id} />
+        ))}
       </div>
     </div>
   );

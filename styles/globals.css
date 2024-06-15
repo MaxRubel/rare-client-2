@@ -51,3 +51,7 @@ body {
   border-color: #74C0FC;
   color: #74C0FC;
 }
+
+.tag-card{
+  padding: 5px 10px;
+}

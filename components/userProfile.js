@@ -30,7 +30,7 @@ function ProfileCard({ userObj }) {
             src={profileImageUrl}
           />
           <h2 className="full-name">{userObj.first_name} {userObj.last_name}</h2>
-          <h5 className="card-text">@{userObj.username}</h5>
+          <h5 className="card-text">@ {userObj.email}</h5>
           <h5 className="card-text">Bio: {userObj.bio}</h5>
           <p className="card-text text-center">Profile created on : {userObj.created_on}</p>
         </Card.Body>
@@ -44,7 +44,7 @@ ProfileCard.propTypes = {
     id: PropTypes.string,
     first_name: PropTypes.string,
     last_name: PropTypes.string,
-    username: PropTypes.string,
+    email: PropTypes.string,
     bio: PropTypes.string,
     created_on: PropTypes.string,
     profile_image_url: PropTypes.string,
