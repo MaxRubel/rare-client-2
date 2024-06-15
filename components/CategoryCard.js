@@ -1,9 +1,16 @@
 import Link from 'next/link';
-import { Card, Button, Modal, Form } from 'react-bootstrap';
+import {
+  Card,
+  Button,
+  Modal,
+  Form,
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { deleteCategory, updateCategory } from '../api/categories';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+
+import { deleteCategory, updateCategory } from '../api/categories';
+
 export default function CategoryCard({ cat, onUpdate }) {
   const [label, setLabel] = useState(cat.label);
   const [showModal, setShowModal] = useState(false);
@@ -17,13 +24,13 @@ export default function CategoryCard({ cat, onUpdate }) {
   };
 
   const handleSave = () => {
-    updateCategory(cat.id, { label: label })
+    updateCategory(cat.id, { label })
       .then()
       .catch((err) => {
         console.error(err);
       });
-      onUpdate();
-      setShowModal(false);
+    onUpdate();
+    setShowModal(false);
   };
 
   const handleDelete = () => {
@@ -38,9 +45,8 @@ export default function CategoryCard({ cat, onUpdate }) {
     }
   };
 
-
   return (
-    <Card style={{padding: '10px', margin: '10px'}}>
+    <Card style={{ padding: '10px', margin: '10px' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Button variant="link" onClick={handleEdit}>
           <AiFillEdit /> {/* Edit icon */}
@@ -55,12 +61,12 @@ export default function CategoryCard({ cat, onUpdate }) {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{color: 'black'}}>Edit Category</Modal.Title>
+          <Modal.Title style={{ color: 'black' }}>Edit Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label style={{color: 'black'}}>Label</Form.Label>
+              <Form.Label style={{ color: 'black' }}>Label</Form.Label>
               <Form.Control type="text" value={label} onChange={(e) => setLabel(e.target.value)} />
             </Form.Group>
           </Form>
@@ -83,4 +89,5 @@ CategoryCard.propTypes = {
     label: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
