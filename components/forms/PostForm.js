@@ -131,16 +131,18 @@ function PostForm({ obj }) {
 
         <FloatingLabel
           controlId="floatingSelect"
-          label="Tags"
+          // label="Tags"
           name="tags"
           className="mb-3"
           value={formInput.tags}
         >
-          <select multiple value={selectedTags} onChange={selectChange}>
-            {tags.map((tag) => (
-              <option key={tag.id} value={tag.id}>{tag.tag}</option>
-            ))}
-          </select>
+          <>
+            <select multiple value={selectedTags} onChange={selectChange} className="select-style">
+              {tags.map((tag) => (
+                <option key={tag.id} value={tag.id}>{tag.tag}</option>
+              ))}
+            </select>
+          </>
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput1" label="Post Content" className="mb-3">
