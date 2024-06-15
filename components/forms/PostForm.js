@@ -26,7 +26,12 @@ function PostForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (obj?.id) setFormInput({ ...obj, category: obj.category.id });
+    if (obj?.id) {
+      setFormInput({
+        ...obj,
+        category: obj.category.id,
+      });
+    }
   }, [obj]);
 
   useEffect(() => {
@@ -57,13 +62,16 @@ function PostForm({ obj }) {
 
   const selectChange = (e) => {
     const id = Number(e.target.value);
+    if (id === 0) {
+      return;
+    }
     const arrCopy = [...selectedTags];
     const index = arrCopy.indexOf(id);
 
     if (index > -1) {
       arrCopy.splice(index, 1);
     } else {
-      arrCopy.push(Number(id));
+      arrCopy.push(id);
     }
     setSelectedTags(arrCopy);
   };
@@ -71,10 +79,16 @@ function PostForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj?.id) {
-      updatePost({ ...formInput, tags: selectedTags }).then(() => router.push('/'));
+      updatePost({
+        ...formInput,
+        tags: selectedTags,
+      }).then(() => router.push('/'));
     } else {
       const payload = {
-        ...formInput, uid: user.uid, publicationDate: getDate(), tags: selectedTags,
+        ...formInput,
+        uid: user.uid,
+        publicationDate: getDate(),
+        tags: selectedTags,
       };
       createPost(payload).then(() => router.push('/'));
     }
@@ -136,13 +150,11 @@ function PostForm({ obj }) {
           className="mb-3"
           value={formInput.tags}
         >
-          <>
-            <select multiple value={selectedTags} onChange={selectChange} className="select-style">
-              {tags.map((tag) => (
-                <option key={tag.id} value={tag.id}>{tag.tag}</option>
-              ))}
-            </select>
-          </>
+          <select multiple value={selectedTags} onClick={selectChange} className="select-style">
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>{tag.tag}</option>
+            ))}
+          </select>
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput1" label="Post Content" className="mb-3">

@@ -19,6 +19,9 @@ function AppNavBar() {
   const { oAuthUser, user } = useAuth();
   const router = useRouter();
 
+  const home = () => {
+    router.push('/');
+  };
   const catManager = () => {
     router.push('/categoryManager');
   };
@@ -35,9 +38,11 @@ function AppNavBar() {
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Container>
-        <Image src={Logo} height="80px" width="80px" alt="Rare Logo" />
+        <div style={{ cursor: 'pointer' }}>
+          <Image src={Logo} height="80px" width="80px" alt="Rare Logo" onClick={home} />
+        </div>
         <Link passHref href="/">
-          <div style={{ color: 'white', padding: '15px' }}>
+          <div style={{ color: 'white', padding: '15px', cursor: 'pointer' }}>
             <h2 className="title is-4"> Rare Publishing </h2>
           </div>
         </Link>
