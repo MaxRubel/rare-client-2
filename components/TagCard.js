@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function TagCard({ tag }) {
   return (
-    <Card>
+    <Card className="tag-card">
       <Link passHref href="/">
         {tag.tag}
       </Link>

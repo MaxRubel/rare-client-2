@@ -114,7 +114,7 @@ function PostForm({ obj }) {
           <Form.Control
             type="url"
             placeholder="imageUrl"
-            name="imageUrl"
+            name="image_url"
             value={formInput.image_url}
             onChange={handleChange}
             required
@@ -161,12 +161,14 @@ function PostForm({ obj }) {
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput1" label="Post Content" className="mb-3">
-          <Form.Control
+          <textarea
             type="text"
+            className="form-control"
             placeholder="Content"
             name="content"
             value={formInput.content}
             onChange={handleChange}
+            style={{ height: '400px' }}
             required
           />
         </FloatingLabel>

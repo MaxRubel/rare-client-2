@@ -15,6 +15,11 @@
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
+    margin-top: 20px;
+}
+
+.post-details{
+    margin-top: 20px;
 }
 
 .reactions-button{
@@ -36,4 +41,14 @@
 
 .smol-text{
     font-size: 12px;
+}
+
+.post-content-post{
+    margin-top: 20px;
+    border-top: 1px solid white;
+    width: 100%;
+}
+
+.posted-on-details{
+    font-size: 14px;
 }
