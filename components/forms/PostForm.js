@@ -5,27 +5,51 @@ import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { createPost, updatePost } from '../../api/postData';
 import { getAllCategories } from '../../api/categories';
 import getDate from '../postDate';
+import { getAllTags } from '../../api/tags';
+import { useAuth } from '../../utils/data/authContext';
 
 const initialState = {
   title: '',
-  image_url: '',
+  imageUrl: '',
   category: {},
   content: '',
+  tags: [],
 };
 
 function PostForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const router = useRouter();
-  const userId = localStorage.getItem('auth_token');
+  const { user } = useAuth();
 
   useEffect(() => {
-    if (obj?.id) setFormInput({ ...obj, category_id: obj.category_id });
+    if (obj?.id) {
+      setFormInput({
+        ...obj,
+        category: obj.category.id,
+      });
+    }
+  }, [obj]);
+
+  useEffect(() => {
+    const prevTags = [];
+    if (obj?.id) {
+      obj.tags.forEach((tag) => {
+        prevTags.push(tag.id);
+      });
+      setSelectedTags(prevTags);
+    }
   }, [obj]);
 
   useEffect(() => {
     getAllCategories().then(setCategories);
+  }, []);
+
+  useEffect(() => {
+    getAllTags().then(setTags);
   }, []);
 
   const handleChange = (e) => {
@@ -36,12 +60,36 @@ function PostForm({ obj }) {
     }));
   };
 
+  const selectChange = (e) => {
+    const id = Number(e.target.value);
+    if (id === 0) {
+      return;
+    }
+    const arrCopy = [...selectedTags];
+    const index = arrCopy.indexOf(id);
+
+    if (index > -1) {
+      arrCopy.splice(index, 1);
+    } else {
+      arrCopy.push(id);
+    }
+    setSelectedTags(arrCopy);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj?.id) {
-      updatePost(formInput).then(() => router.push('/'));
+      updatePost({
+        ...formInput,
+        tags: selectedTags,
+      }).then(() => router.push('/'));
     } else {
-      const payload = { ...formInput, user_id: userId, publication_date: getDate() };
+      const payload = {
+        ...formInput,
+        uid: user.uid,
+        publicationDate: getDate(),
+        tags: selectedTags,
+      };
       createPost(payload).then(() => router.push('/'));
     }
   };
@@ -66,8 +114,8 @@ function PostForm({ obj }) {
           <Form.Control
             type="url"
             placeholder="Enter an image url"
-            name="image_url"
-            value={formInput.image_url}
+            name="imageUrl"
+            value={formInput.imageUrl}
             onChange={handleChange}
             required
           />
@@ -76,10 +124,10 @@ function PostForm({ obj }) {
         <FloatingLabel controlId="floatingSelect" label="Category">
           <Form.Select
             aria-label="Category"
-            name="category_id"
+            name="category"
             onChange={handleChange}
             className="mb-3"
-            value={formInput.category_id}
+            value={formInput.category}
           >
             <option value="">Select applicable category</option>
             {
@@ -93,6 +141,20 @@ function PostForm({ obj }) {
             ))
           }
           </Form.Select>
+        </FloatingLabel>
+
+        <FloatingLabel
+          controlId="floatingSelect"
+          // label="Tags"
+          name="tags"
+          className="mb-3"
+          value={formInput.tags}
+        >
+          <select multiple value={selectedTags} onClick={selectChange} className="select-style">
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>{tag.tag}</option>
+            ))}
+          </select>
         </FloatingLabel>
 
         <FloatingLabel controlId="floatingInput1" label="Post Content" className="mb-3">
@@ -116,10 +178,16 @@ function PostForm({ obj }) {
 PostForm.propTypes = {
   obj: PropTypes.shape({
     title: PropTypes.string,
-    image_url: PropTypes.string,
+    imageUrl: PropTypes.string,
     content: PropTypes.string,
-    category_id: PropTypes.string,
+    category: PropTypes.string,
     id: PropTypes.string,
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        tag: PropTypes.string,
+      }),
+    ),
   }).isRequired,
 };
 

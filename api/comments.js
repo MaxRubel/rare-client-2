@@ -1,4 +1,4 @@
-const endpoint = 'http://localhost:8088';
+const endpoint = 'http://localhost:8000';
 
 const getCommentsOfPost = (postId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/comments?postId=${postId}`, {

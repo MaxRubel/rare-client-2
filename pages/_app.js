@@ -1,8 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import '../styles/forms.css';
-import { AuthProvider } from '../utils/data/authContext';
+import '../styles/navbar.css';
+import '../styles/categoryManager.css';
+
 import ViewDirectorBasedOnUserAuthStatus from '../utils/data/ViewDirector';
+import { AuthProvider } from '../utils/data/authContext';
 
 // eslint-disable-next-line react/prop-types
 function MyApp({ Component, pageProps }) {

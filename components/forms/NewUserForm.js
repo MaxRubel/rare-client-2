@@ -1,10 +1,14 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/data/authContext';
-import { createNewUser } from '../../api/users';
+import { createNewUser, patchUser } from '../../api/users';
 import { signOut } from '../../utils/data/AuthManager';
 
-export default function NewUserForm() {
+export default function NewUserForm({ user }) {
+  const update = user?.id;
+
   const { oAuthUser, updateUser } = useAuth();
 
   const initValue = {
@@ -17,6 +21,13 @@ export default function NewUserForm() {
   };
 
   const [formInput, setFormInput] = useState(initValue);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user?.id) {
+      setFormInput(user);
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,20 +36,32 @@ export default function NewUserForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formInput);
-    createNewUser(formInput).then(() => {
-      updateUser(oAuthUser.uid);
-    });
+    if (!update) {
+      createNewUser(formInput).then(() => {
+        updateUser(oAuthUser.uid).then(() => {
+          router.push('/');
+        });
+      });
+    } else {
+      patchUser(formInput, user.id).then(() => {
+        updateUser(oAuthUser.uid).then(() => {
+          router.push('/profilePage');
+        });
+      });
+    }
   };
 
   return (
     <>
-
-      <Button type="button" size="lg" className="btn-danger" onClick={signOut}>
-        Sign Out
-      </Button>
+      {!user?.id && (
+        <Button type="button" size="lg" className="btn-danger" onClick={signOut}>
+          Sign Out
+        </Button>
+      )}
       <form className="new-user-form" onSubmit={handleSubmit}>
-        <h1> Shwelcome - Please Do This:</h1>
+        {update ? (
+          (<h1> Update your info:</h1>)
+        ) : <h1> Shwelcome - Please Do This:</h1>}
         <div className="field">
           <label className="label" htmlFor="first_name">First Name</label>
           <div className="control">
@@ -105,10 +128,21 @@ export default function NewUserForm() {
         </div>
 
         <div style={{ marginTop: '20px' }}>
-          <div className="control">
+          <div style={{ display: 'flex', gap: '10px' }}>
             <button className="btn btn-primary" type="submit">
               Submit
             </button>
+            {update && (
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={() => {
+                  router.push('/profilePage');
+                }}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </div>
       </form>

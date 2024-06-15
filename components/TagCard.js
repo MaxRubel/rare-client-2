@@ -6,7 +6,7 @@ export default function TagCard({ tag }) {
   return (
     <Card>
       <Link passHref href="/">
-        {tag.label}
+        {tag.tag}
       </Link>
     </Card>
   );
@@ -14,7 +14,7 @@ export default function TagCard({ tag }) {
 
 TagCard.propTypes = {
   tag: PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
   }).isRequired,
 };

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import ProfileCard from '../components/userProfile';
-import { getSingleUser } from '../utils/data/userData';
+import { useAuth } from '../utils/data/authContext';
+import { getSingleUser } from '../api/users';
 
 function Profile() {
-  const [user, setUser] = useState({});
+  const { user } = useAuth();
+
+  const [userObj, setUserObj] = useState({});
 
   useEffect(() => {
-    const userId = localStorage.getItem('auth_token');
-    getSingleUser(userId).then((taco) => {
-      setUser({ ...taco, id: String(taco.id) });
-    });
-  }, []);
+    getSingleUser(user.id).then(setUserObj);
+  }, [user]);
   return (
     <div>
-      <ProfileCard userObj={user} />
+      <ProfileCard userObj={userObj} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import TagCard from '../components/TagCard';
 
 export default function TagManager() {
   const [tags, setTags] = useState([]);
+  const [key, setKey] = useState(0);
   const [update, setUpdate] = useState(0);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function TagManager() {
 
   const onUpdate = () => {
     setUpdate((preVal) => preVal + 1);
+    setKey((preVal) => preVal + 1);
   };
 
   return (
@@ -20,12 +22,12 @@ export default function TagManager() {
       <div className="centered">
         <div className="page-grid-2-cat">
           <div>
+            <TagForm onUpdate={onUpdate} key={key} />
+          </div>
+          <div>
             {tags.map((tag) => (
               <TagCard tag={tag} key={tag.id} />
             ))}
-          </div>
-          <div>
-            <TagForm onUpdate={onUpdate} />
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import CategoryForm from '../components/forms/CategoryForm';
 
 export default function CategoryManager() {
   const [cats, setCats] = useState([]);
+  const [key, setKey] = useState(0);
   const [update, setUpdate] = useState(0);
 
   useEffect(() => {
@@ -13,18 +14,19 @@ export default function CategoryManager() {
 
   const onUpdate = () => {
     setUpdate((preVal) => preVal + 1);
+    setKey((preVal) => preVal + 1);
   };
 
   return (
     <div className="centered">
       <div className="page-grid-2-cat">
         <div>
+          <CategoryForm onUpdate={onUpdate} key={key} />
+        </div>
+        <div>
           {cats.map((cat) => (
             <CategoryCard cat={cat} key={cat.id} onUpdate={onUpdate} />
           ))}
-        </div>
-        <div>
-          <CategoryForm onUpdate={onUpdate} />
         </div>
       </div>
     </div>
