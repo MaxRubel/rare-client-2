@@ -20,7 +20,7 @@ export default function CategoryManager() {
       <div className="page-grid-2-cat">
         <div>
           {cats.map((cat) => (
-            <CategoryCard cat={cat} key={cat.id} />
+            <CategoryCard cat={cat} key={cat.id} onUpdate={onUpdate} />
           ))}
         </div>
         <div>
