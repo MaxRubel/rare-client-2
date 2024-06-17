@@ -36,8 +36,8 @@ function AppNavBar() {
   };
 
   const userManager = () => {
-    router.push('/userManager')
-  }
+    router.push('/userManager');
+  };
 
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
