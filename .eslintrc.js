@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['next', 'next/core-web-vitals', 'prettier', 'airbnb','next/babel','next/core-web-vitals'],
+  extends: ['next', 'next/core-web-vitals', 'prettier', 'airbnb'],
   env: {
     browser: true,
     es2021: true,
