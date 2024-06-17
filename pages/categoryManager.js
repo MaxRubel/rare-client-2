@@ -15,7 +15,6 @@ export default function CategoryManager() {
   const onUpdate = () => {
     setUpdate((preVal) => preVal + 1);
     setKey((preVal) => preVal + 1);
-
   };
 
   return (

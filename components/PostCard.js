@@ -20,11 +20,15 @@ function PostCard({ postObj, onUpdate }) {
 
   return (
     <Card id="post-styling">
-      <Card.Title><h2>{postObj.title} </h2></Card.Title>
-      <div><h5>Publication Date: {postObj.publication_date}</h5></div>
-      <Card.Img src={postObj.image_url} alt={postObj.title} style={{ minHeight: '300px ' }} />
+      <Card.Title>
+        <h2>{postObj.title} </h2>
+      </Card.Title>
+      <div>
+        <h5>Publication Date: {postObj.publication_date}</h5>
+      </div>
+      <Card.Img src={postObj.image_url} alt={postObj.title} style={{ width: '200px', height: '200px' }} />
       <Card.Body>
-        { user.uid == postObj.rare_user.uid ? (
+        {user.uid == postObj.rare_user.uid ? (
           <>
             <Link href={`/post/edit/${postObj.id}`} passHref>
               <Button id="edit-btn">
@@ -41,13 +45,14 @@ function PostCard({ postObj, onUpdate }) {
             </Button>
           </>
         ) : (
-          <Button id="view-btn">
-            <FontAwesomeIcon icon={faEye} style={{ color: '#74C0FC' }} />
-          </Button>
+          <Link href={`/post/${postObj.id}`} passHref>
+            <Button id="view-btn">
+              <FontAwesomeIcon icon={faEye} style={{ color: '#74C0FC' }} />
+            </Button>
+          </Link>
         )}
       </Card.Body>
     </Card>
-
   );
 }
 

@@ -24,7 +24,7 @@ export default function TagManager() {
           <div>
             <TagForm onUpdate={onUpdate} key={key} />
           </div>
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {tags.map((tag) => (
               <TagCard tag={tag} key={tag.id} />
             ))}
