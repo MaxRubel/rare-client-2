@@ -36,7 +36,7 @@ const AuthProvider = (props) => {
         checkUser(fbUser.uid).then((userData) => {
           let userObj = {};
           if (!userData.uid) {
-            userObj = null;
+            userObj = false;
           } else {
             userObj = { fbUser, uid: fbUser.uid, ...userData };
           }
@@ -44,6 +44,7 @@ const AuthProvider = (props) => {
         });
       } else {
         setOAuthUser(false);
+        setUser(false);
       }
     }); // creates a single global listener for auth state changed
   }, []);
@@ -54,7 +55,7 @@ const AuthProvider = (props) => {
       user,
       oAuthUser,
       updateUser,
-      userLoading: oAuthUser === null,
+      userLoading: oAuthUser === null && user == null,
       // as long as user === null, will be true
       // As soon as the user value !== null, value will be false
     }),

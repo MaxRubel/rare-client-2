@@ -50,7 +50,7 @@ export default function PostDeatil({ postId }) {
           <div style={{ marginTop: '20px' }}>{post?.content}</div>
         </div>
       </div>
-      <div className="centered">
+      <div className="flex-col-tags">
         {post?.tags.map((tag) => (
           <TagCard tag={tag} key={tag.id} />
         ))}

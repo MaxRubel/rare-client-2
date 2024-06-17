@@ -66,7 +66,6 @@ function AppNavBar() {
             ) : (
               ''
             )}
-
             {oAuthUser ? (
               <div className="btn-nav-row">
                 <Button

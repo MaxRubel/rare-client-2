@@ -24,7 +24,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
       </>
     );
   }
-  if (oAuthUser && !user) {
+  if (oAuthUser && user !== null) {
     return (
       <NewUserForm />
     );

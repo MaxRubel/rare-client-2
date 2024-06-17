@@ -55,3 +55,10 @@ body {
 .tag-card{
   padding: 5px 10px;
 }
+
+.flex-col-tags{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px
+}
