@@ -37,4 +37,16 @@ const patchUser = (payload, id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getSingleUser, createNewUser, patchUser };
+const getAllUsers = () => new Promise((resolve, reject) => {
+  fetch(`${endppoint}/users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+export { getSingleUser, createNewUser, patchUser, getAllUsers };
