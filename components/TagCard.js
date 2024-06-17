@@ -1,13 +1,10 @@
-import Link from 'next/link';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function TagCard({ tag }) {
   return (
     <Card className="tag-card">
-      <Link passHref href="/">
-        {tag.tag}
-      </Link>
+      {tag.tag}
     </Card>
   );
 }
