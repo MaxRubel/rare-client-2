@@ -41,7 +41,7 @@ function ProfileCard({ userObj }) {
 
 ProfileCard.propTypes = {
   userObj: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     first_name: PropTypes.string,
     last_name: PropTypes.string,
     email: PropTypes.string,
