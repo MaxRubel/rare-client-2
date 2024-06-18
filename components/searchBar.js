@@ -6,12 +6,12 @@ const SearchBar = ({ setPostSearch, posts }) => {
     const filteredPosts = [];
 
     posts.forEach((post) => {
-      if (post.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+      const titleSearch = post.title.toLowerCase().includes(e.target.value.toLowerCase());
+      const categorySearch = post.category.label.toLowerCase().includes(e.target.value.toLowerCase());
+
+      if (titleSearch || categorySearch) {
         filteredPosts.push(post);
       }
-      // if (review.rating === e.target.value) {
-      //   filteredSpirits.push(review);
-      // }
     });
     setPostSearch(filteredPosts);
   };
@@ -32,6 +32,7 @@ SearchBar.propTypes = {
       image: PropTypes.string,
       title: PropTypes.string,
       publicationDate: PropTypes.string,
+      category: PropTypes.string,
     }),
   ).isRequired,
   setPostSearch: PropTypes.func.isRequired,
