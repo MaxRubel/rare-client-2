@@ -29,7 +29,9 @@ export default function PostDeatil({ postId }) {
       <div className="post-details center-post">
         <div><h1>{post?.title}</h1></div>
         <Image src={post?.image_url} alt="Post image" />
-
+        <div style={{ marginTop: '15px' }}>
+          <ReactionBar postId={postId} />
+        </div>
         <div className="post-row">
           <Link passHref href="/">
             <div style={{ cursor: 'pointer' }}>
@@ -38,9 +40,6 @@ export default function PostDeatil({ postId }) {
           </Link>
           <div>
             View Comments
-          </div>
-          <div>
-            <ReactionBar postId={postId} />
           </div>
         </div>
         <div className="post-content-post">
