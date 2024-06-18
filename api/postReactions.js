@@ -1,14 +1,14 @@
 const endpoint = 'http://localhost:8000';
 
 const getReactionsOfPost = (postId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/post_reactions/${postId}`, {
+  fetch(`${endpoint}/post_reactions/${postId}/getReactions`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(JSON.parse(data)))
     .catch(reject);
 });
 
