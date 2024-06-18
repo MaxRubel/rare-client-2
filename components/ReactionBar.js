@@ -2,33 +2,20 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
-import {
-  createPostReaction, deletePostReaction, getReactionsOfPost, getUserReactionsOfPost,
-  postEmoji,
-} from '../api/postReactions';
-import { getSingleReaction } from '../api/reactions';
+import { getReactionsOfPost, postEmoji } from '../api/postReactions';
 import { useAuth } from '../utils/data/authContext';
 
 export default function ReactionBar({ postId }) {
-  const [hasReacted, setHasReacted] = useState(false);
   const [update, setUpdate] = useState(0);
   const [reactions, setReactions] = useState([]);
   const [emojiOpen, setEmojiOpen] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
-    getReactionsOfPost(postId).then((data) => {
-      const promises = data
-        .map((postReaction) => getSingleReaction(postReaction.id).then((data2) => ({ ...postReaction, content: data2.image_url })));
-
-      Promise.all(promises).then((allReactions) => {
-        setReactions(allReactions);
-      });
-    });
+    getReactionsOfPost(postId).then(setReactions);
   }, [postId, update]);
 
   const handleEmojiOpen = () => {
-    console.log(emojiOpen);
     setEmojiOpen((preVal) => !preVal);
   };
 
@@ -40,6 +27,7 @@ export default function ReactionBar({ postId }) {
     };
     postEmoji(payload).then(() => {
       setUpdate((preval) => preval + 1);
+      setEmojiOpen((preVal) => !preVal);
     });
   };
 
@@ -47,8 +35,8 @@ export default function ReactionBar({ postId }) {
     <div className="reactions-container">
       <div className="reactions-button">
         {reactions.map((reaction) => (
-          <div className="centered" style={{ flexDirection: 'column' }}>
-            <div>{reaction.content}</div>
+          <div key={reaction.reaction.id} className="centered" style={{ flexDirection: 'column' }}>
+            <div style={{ fontSize: '30px' }}>{reaction.reaction.image_url}</div>
             <div style={{ fontSize: '14px' }}>{reaction.amount}</div>
           </div>
         ))}

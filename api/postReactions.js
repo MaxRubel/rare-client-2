@@ -1,27 +1,26 @@
 const endpoint = 'http://localhost:8000';
 
 const getReactionsOfPost = (postId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/post_reactions/${postId}/getReactions`, {
+  fetch(`${endpoint}/post_reactions/${postId}/get_reactions_of_post`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(JSON.parse(data)))
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
 const postEmoji = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/reactions/check_if_emoji_exists`, {
+  fetch(`${endpoint}/post_reactions/post_emoji`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(() => resolve())
     .catch(reject);
 });
 
