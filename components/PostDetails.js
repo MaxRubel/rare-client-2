@@ -28,7 +28,7 @@ export default function PostDeatil({ postId }) {
       </div>
       <div className="post-details center-post">
         <div><h1>{post?.title}</h1></div>
-        <Image src={post?.image_url} alt="Post image" />
+        <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
         <div style={{ marginTop: '15px' }}>
           <ReactionBar postId={postId} />
         </div>

@@ -1,16 +1,16 @@
-.post-container{
+.post-container {
     display: grid;
     grid-template-columns: .5fr 900px .5fr;
 }
 
-.center-post{
+.center-post {
     justify-content: center;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.post-row{
+.post-row {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
@@ -18,11 +18,11 @@
     margin-top: 20px;
 }
 
-.post-details{  
+.post-details {
     margin-top: 20px;
 }
 
-.reactions-container{
+.reactions-container {
     display: flex;
     flex-direction: column;
     /* border: 1px solid white; */
@@ -31,33 +31,33 @@
     align-items: center;
 }
 
-.reactions-button{
-    width: 270px;
+.reactions-button {
+    /* width: 270px; */
     font-size: 24pt;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
-.reaction-button{
+.reaction-button {
     background-color: transparent;
     border: transparent;
     color: white;
     display: inline;
 }
 
-.smol-text{
+.smol-text {
     font-size: 12px;
 }
 
-.post-content-post{
+.post-content-post {
     margin-top: 20px;
     border-top: 1px solid white;
     width: 100%;
 }
 
-.posted-on-details{
+.posted-on-details {
     font-size: 14px;
 }
