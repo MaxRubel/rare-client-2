@@ -34,7 +34,9 @@ function AppNavBar() {
   const profilePage = () => {
     router.push('/profilePage');
   };
-
+  const reactionManager = () => {
+    router.push('/reactionManager');
+  };
   const userManager = () => {
     router.push('/userManager');
   };
@@ -66,6 +68,7 @@ function AppNavBar() {
                   Category Manager
                 </button>
                 <button type="button" className="nav-button" onClick={tagManager}>Tag Manager</button>
+                <button type="button" className="nav-button" onClick={reactionManager}>Reaction Manager</button>
                 <button type="button" className="nav-button" onClick={userManager}>User Manager</button>
               </div>
             ) : (
