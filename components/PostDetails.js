@@ -31,7 +31,7 @@ export default function PostDeatil({ postId }) {
         <Image src={post?.image_url} alt="Post image" />
 
         <div className="post-row">
-          <Link passHref href="/">
+          <Link passHref href="/userPosts">
             <div style={{ cursor: 'pointer' }}>
               By: {author?.first_name} {author?.last_name}
             </div>
