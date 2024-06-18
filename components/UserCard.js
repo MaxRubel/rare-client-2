@@ -5,13 +5,13 @@ import { patchUser } from '../api/users';
 export default function UserCard({ user, onUpdate }) {
   console.warn('User_Id', user.id);
   // eslint-disable-next-line no-unused-vars
-  function handleToggleActive() {
+  const handleToggleActive = () => {
     const { id } = user;
     const payload = { ...user, active: !user.active };
     patchUser(payload, id).then(() => {
       onUpdate();
     });
-  }
+  };
   return (
     <Card style={{ padding: '10px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -23,8 +23,7 @@ export default function UserCard({ user, onUpdate }) {
             id={`active-switch-${user.id}`}
             label=""
             checked={user.active}
-            // onChange={handleToggleActive}
-
+            onChange={handleToggleActive}
           />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>

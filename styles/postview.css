@@ -22,14 +22,23 @@
     margin-top: 20px;
 }
 
-.reactions-button{
-    border: 1px solid white;
+.reactions-container{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid white; */
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.reactions-button{
     width: 270px;
     font-size: 24pt;
     overflow: hidden;
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 .reaction-button{
