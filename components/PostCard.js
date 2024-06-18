@@ -61,8 +61,15 @@ PostCard.propTypes = {
     title: PropTypes.string,
     publication_date: PropTypes.string,
     image_url: PropTypes.string,
-    rare_user: PropTypes.number,
     id: PropTypes.number,
+    rare_user: PropTypes.shape({
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
+      bio: PropTypes.string,
+      profile_img_url: PropTypes.string,
+      email: PropTypes.string,
+      uid: PropTypes.string,
+    }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
