@@ -3,7 +3,6 @@ import { Card, Button, Form } from 'react-bootstrap';
 import { patchUser } from '../api/users';
 
 export default function UserCard({ user, onUpdate }) {
-  console.warn('User_Id', user.id);
   // eslint-disable-next-line no-unused-vars
   const handleToggleActive = () => {
     const { id } = user;

@@ -8,8 +8,12 @@ function Profile() {
 
   const [userObj, setUserObj] = useState({});
 
+  console.log(userObj);
+
   useEffect(() => {
-    getSingleUser(user.id).then(setUserObj);
+    getSingleUser(user.uid).then((data) => {
+      setUserObj(data);
+    });
   }, [user]);
   return (
     <div>
