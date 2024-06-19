@@ -118,7 +118,7 @@ export default function ReactionBar({ postId }) {
       </div>
 
       <div className="relative">
-        <div className="absolute"><EmojiPicker onEmojiClick={handleEmojiClick} open={emojiOpen} /></div>
+        <div className="absolute"><EmojiPicker className="glass" onEmojiClick={handleEmojiClick} open={emojiOpen} /></div>
         <div className="absolute"><CustomReactionPicker updateReactionBar={updateReactionBar} postId={postId} open={customReactsOpen} /></div>
       </div>
     </div>
