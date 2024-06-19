@@ -30,12 +30,23 @@ export default function PostDeatil({ postId }) {
         {/* margin */}
       </div>
       <div className="post-details center-post">
+
         <div><h1>{post?.title}</h1></div>
-        <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+          <div />
+          <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
+          <div className="flex-col-tags" style={{ padding: '20px' }}>
+
+            {post?.tags.map((tag) => (
+              <TagCard tag={tag} key={tag.id} />
+            ))}
+          </div>
+        </div>
         <div style={{ marginTop: '15px' }}>
           <ReactionBar postId={postId} />
         </div>
         <div className="post-row">
+
           {user?.uid !== author?.uid ? (
             <Link passHref href={`/post/otherUsersPosts/${author.uid}`}>
               <div style={{ cursor: 'pointer' }}>
@@ -51,20 +62,19 @@ export default function PostDeatil({ postId }) {
           )}
           <div>
             View Comments
-          </div>
+          </div> */}
         </div>
         <div className="post-content-post">
-          <div className="posted-on-details">
+          <div className="posted-on-details" style={{ marginTop: '8px', display: 'flex' }}>
             posted on: {post?.publication_date}
+          </div>
+          <div style={{ marginTop: '7px' }}>
+            View Comments
           </div>
           <div style={{ marginTop: '20px' }}>{post?.content}</div>
         </div>
       </div>
-      <div className="flex-col-tags">
-        {post?.tags.map((tag) => (
-          <TagCard tag={tag} key={tag.id} />
-        ))}
-      </div>
+
     </div>
   );
 }

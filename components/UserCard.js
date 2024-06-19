@@ -28,7 +28,7 @@ export default function UserCard({ user, onUpdate }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h3 style={{ marginRight: '10px' }}>{user.is_staff ? 'Admin' : 'Author'}</h3>
-          <Button variant={user.is_staff ? 'danger' : 'success'} onClick={console.log('I click the button')}>{user.is_staff ? 'Demotion' : 'Promotion'}</Button>
+          <Button variant={user.is_staff ? 'danger' : 'success'}>{user.is_staff ? 'Demotion' : 'Promotion'}</Button>
         </div>
       </div>
     </Card>
