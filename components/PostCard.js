@@ -28,7 +28,7 @@ function PostCard({ postObj, onUpdate }) {
       </div>
       <Card.Img src={postObj.image_url} alt={postObj.title} style={{ width: '200px', height: '200px' }} />
       <Card.Body>
-        {user.uid == postObj.rare_user.uid ? (
+        {user.uid == postObj.rare_user?.uid ? (
           <>
             <Link href={`/post/edit/${postObj.id}`} passHref>
               <Button id="edit-btn">

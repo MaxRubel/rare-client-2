@@ -6,11 +6,13 @@ import { getSinglePost } from '../api/postData';
 import { getSingleUser } from '../api/users';
 import ReactionBar from './ReactionBar';
 import TagCard from './TagCard';
+import { useAuth } from '../utils/data/authContext';
 
 // eslint-disable-next-line react/prop-types
 export default function PostDeatil({ postId }) {
   const [post, setPost] = useState(null);
-  const [author, setAuthor] = useState(null);
+  const [author, setAuthor] = useState({});
+  const { user } = useAuth();
 
   useEffect(() => {
     getSinglePost(postId).then((data) => {
@@ -20,6 +22,7 @@ export default function PostDeatil({ postId }) {
       ]);
     });
   }, [postId]);
+  console.warn(author);
 
   return (
     <div className="post-container">
@@ -43,12 +46,21 @@ export default function PostDeatil({ postId }) {
           <ReactionBar postId={postId} />
         </div>
         <div className="post-row">
-          <Link passHref href="/userPosts">
-            <div style={{ cursor: 'pointer' }}>
-              By: {author?.first_name} {author?.last_name}
-            </div>
-          </Link>
-          {/* <div>
+
+          {user?.uid !== author?.uid ? (
+            <Link passHref href={`/post/otherUsersPosts/${author.uid}`}>
+              <div style={{ cursor: 'pointer' }}>
+                By: {author?.first_name} {author?.last_name}
+              </div>
+            </Link>
+          ) : (
+            <Link passHref href="/userPosts">
+              <div style={{ cursor: 'pointer' }}>
+                By: {author?.first_name} {author?.last_name}
+              </div>
+            </Link>
+          )}
+          <div>
             View Comments
           </div> */}
         </div>
