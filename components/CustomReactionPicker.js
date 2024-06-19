@@ -24,13 +24,26 @@ export default function CustomReactionPicker({ open, postId, updateReactionBar }
   };
 
   return (
-    <Card className="custom-reaction-picker" style={{ display: open ? 'flex' : 'none' }}>
+    <Card
+      className="custom-reaction-picker glass"
+      style={{ display: open ? 'flex' : 'none' }}
+    >
       <div style={{ marginBottom: '12px' }}>
-        <input className="form-control" placeholder="Search" onChange={handleSearch} />
+        <input
+          className="form-control"
+          placeholder="Search"
+          onChange={handleSearch}
+        />
       </div>
       <div className="reactions-container">
         {cReactions.map((reaction) => (
-          <ReactionCard updateReactionBar={updateReactionBar} inPost postId={postId} reaction={reaction} key={reaction.id} />
+          <ReactionCard
+            updateReactionBar={updateReactionBar}
+            inPost
+            postId={postId}
+            reaction={reaction}
+            key={reaction.id}
+          />
         ))}
       </div>
     </Card>

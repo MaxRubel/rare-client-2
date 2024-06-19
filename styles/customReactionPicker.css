@@ -1,5 +1,5 @@
-.custom-reaction-picker{
-    width: 420px;
+.custom-reaction-picker {
+    width: 450px;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
@@ -8,7 +8,7 @@
     overflow: auto;
 }
 
-.reactions-container{
+.reactions-container {
     flex-wrap: wrap;
     flex-direction: row;
 }

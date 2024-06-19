@@ -32,13 +32,23 @@ export default function ReactionCard({
       onClick={handleClick}
       className="reaction-card"
       style={{
-        width: '8rem',
-        height: '8rem',
+        width: '9rem',
+        height: '7rem',
+        padding: '0px',
         cursor: inPost ? 'pointer' : '',
+        backgroundColor: 'lightgrey',
+        border: 'none',
+        // color: 'white',
       }}
     >
 
-      <Card.Title style={{ margin: '0px', textAlign: 'center', paddingTop: '3px' }}>{reaction.label}</Card.Title>
+      <Card.Title style={{
+        fontSize: '12pt',
+        textAlign: 'center',
+        marginBottom: '0px',
+      }}
+      >{reaction.label}
+      </Card.Title>
 
       <Card.Body style={{
         display: 'flex',
@@ -50,9 +60,9 @@ export default function ReactionCard({
         <Card.Img
           src={reaction.image_url}
           style={{
-            objectFit: 'contain',
-            height: '75px',
-            width: '95px',
+            // objectFit: 'fill',
+            height: '80px',
+            width: '130px',
           }}
         />
       </Card.Body>
