@@ -10,7 +10,6 @@ export const getReactions = () => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        console.log('Fetched data:', data);
         resolve(Object.values(data));
       } else {
         resolve([]);

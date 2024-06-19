@@ -31,6 +31,13 @@ body {
   align-items: center;
 }
 
+.flex-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .clear-button{
   background-color: transparent;
   color: white;
@@ -47,7 +54,7 @@ position: relative;
 
 .absolute{
   position: absolute; /* Fixed positioning */
-  top: 40px; 
+  top: -160px; 
   left: 0; 
   width: 100%; 
   z-index: 10; /* Ensure it sits on top */

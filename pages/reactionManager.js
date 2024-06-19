@@ -3,6 +3,7 @@ import { getReactions } from '../api/reactions';
 // create ReactionCard and import
 import ReactionForm from '../components/forms/ReactionForm';
 import ReactionCard from '../components/utils/ReactionCard';
+import EmojiCard from '../components/EmojiCard';
 
 export default function ReactionManager() {
   const [reacts, setReacts] = useState([]);
@@ -12,7 +13,6 @@ export default function ReactionManager() {
   useEffect(() => {
     getReactions()
       .then((data) => {
-        console.log('Setting reactions:', data); // Debug line
         setReacts(data);
       })
       .catch((error) => {
@@ -26,21 +26,44 @@ export default function ReactionManager() {
   };
 
   return (
-    <div className="centered">
-      <div className="page-grid-2-cat">
+    <div className="centered" style={{ flexDirection: 'column' }}>
+      <div style={{ marginTop: '25px' }}>
         <div>
           <ReactionForm onUpdate={onUpdate} key={key} />
         </div>
         <div>
-          {Array.isArray(reacts) && reacts.length > 0 ? (
-            reacts.map((reaction) => (
-              <ReactionCard reaction={reaction} key={reaction.id} />
-            ))
-          ) : (
-            <p>No reactions available</p>
+          {reacts.length === 0 && <p>No reactions available</p>}
+        </div>
+      </div>
+
+      {/* ------ Custom Reactions Container ---- */}
+      <div id="emoji-container" className="centered" style={{ flexDirection: 'column', marginTop: '20px' }}>
+        <h3>Homemade Reactions</h3>
+        <div id="emoji-container" className="flex-box">
+          {Array.isArray(reacts) && reacts.length > 0 && (
+            reacts
+              .filter((reaction) => reaction.label !== 'emoji')
+              .map((reaction) => (
+                <ReactionCard reaction={reaction} key={reaction.id} />
+              ))
           )}
         </div>
       </div>
+
+      {/* ------ Emoji Container ------*/}
+      <div id="emoji-container" className="centered" style={{ flexDirection: 'column', marginTop: '20px' }}>
+        <h3>Emojis</h3>
+        <div id="emoji-container" className="flex-box">
+          {Array.isArray(reacts) && reacts.length > 0 && (
+            reacts
+              .filter((reaction) => reaction.label === 'emoji')
+              .map((reaction) => (
+                <EmojiCard emoji={reaction.image_url} key={reaction.id} />
+              ))
+          )}
+        </div>
+      </div>
+
     </div>
   );
 }

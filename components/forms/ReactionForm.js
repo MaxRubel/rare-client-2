@@ -26,7 +26,7 @@ export default function ReactionForm({ onUpdate }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card className="create-react-form">
+      <Card className="create-react-form" style={{ padding: '15px' }}>
         <h5>Create a New Reaction</h5>
         <input
           className="form-control"
