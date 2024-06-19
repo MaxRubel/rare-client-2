@@ -1,7 +1,13 @@
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { createPostReaction } from '../../api/postReactions';
+import { postGif } from '../../api/postReactions';
 import { useAuth } from '../../utils/data/authContext';
+
+// inPost <bool> signifies that we are viewing this card from the Post Details Page
+
+// updateReactionBar <func> updates the reaction bar on the Post page
+
+// Post Id <string> is only valid when viewing this reaction on the Post page
 
 export default function ReactionCard({
   reaction, inPost, postId, updateReactionBar,
@@ -15,7 +21,7 @@ export default function ReactionCard({
         post_id: postId,
         reaction_id: reaction.id,
       };
-      createPostReaction(payload).then(() => {
+      postGif(payload).then(() => {
         updateReactionBar();
       });
     }

@@ -31,14 +31,14 @@ body {
   align-items: center;
 }
 
-.flex-box{
+.flex-box {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px;
 }
 
-.clear-button{
+.clear-button {
   background-color: transparent;
   color: white;
   border: none;
@@ -48,16 +48,18 @@ body {
   align-items: center;
 }
 
-.relative{
-position: relative;
+.relative {
+  position: relative;
 }
 
-.absolute{
-  position: absolute; /* Fixed positioning */
-  top: -160px; 
-  left: 0; 
-  width: 100%; 
-  z-index: 10; /* Ensure it sits on top */
+.absolute {
+  position: absolute;
+  /* Fixed positioning */
+  top: -160px;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  /* Ensure it sits on top */
 }
 
 #edit-btn {
@@ -81,13 +83,14 @@ position: relative;
   color: #74C0FC;
 }
 
-.tag-card{
+.tag-card {
   padding: 5px 10px;
 }
 
-.flex-col-tags{
+.flex-col-tags {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px
+  flex-direction: row;
+  justify-content: left;
+  gap: 30px;
+  flex-wrap: wrap;
 }

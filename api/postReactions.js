@@ -24,6 +24,18 @@ const postEmoji = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const postGif = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/post_reactions/post_gif`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(() => resolve())
+    .catch(reject);
+});
+
 const createPostReaction = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/post_reactions`, {
     method: 'POST',
@@ -61,5 +73,5 @@ const deletePostReaction = (id) => new Promise((resolve, reject) => {
 });
 
 export {
-  getReactionsOfPost, postEmoji, createPostReaction, getUserReactionsOfPost, deletePostReaction,
+  getReactionsOfPost, postEmoji, createPostReaction, getUserReactionsOfPost, deletePostReaction, postGif,
 };

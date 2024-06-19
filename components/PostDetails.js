@@ -5,7 +5,6 @@ import { Image } from 'react-bootstrap';
 import { getSinglePost } from '../api/postData';
 import { getSingleUser } from '../api/users';
 import ReactionBar from './ReactionBar';
-import TagCard from './TagCard';
 import { useAuth } from '../utils/data/authContext';
 
 // eslint-disable-next-line react/prop-types
@@ -17,64 +16,77 @@ export default function PostDeatil({ postId }) {
   useEffect(() => {
     getSinglePost(postId).then((data) => {
       setPost(data);
-      getSingleUser(data.rare_user_id).then((authorData) => [
-        setAuthor(authorData),
-      ]);
+      getSingleUser(data.rare_user.uid).then((authorData) => {
+        setAuthor(authorData);
+      });
     });
   }, [postId]);
-  console.warn(author);
 
   return (
     <div className="post-container">
       <div className="centered">
-        {/* margin */}
+        {/* margin left */}
       </div>
+
+      {/* ----center-of-page--- */}
       <div className="post-details center-post">
-
-        <div><h1>{post?.title}</h1></div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-          <div />
-          <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
-          <div className="flex-col-tags" style={{ padding: '20px' }}>
-
-            {post?.tags.map((tag) => (
-              <TagCard tag={tag} key={tag.id} />
-            ))}
+        <div id="image-tags-and-reactions">
+          <div style={{
+            color: 'white',
+            padding: '9px',
+            textTransform: 'uppercase',
+            textAlign: 'center',
+          }}
+          ><h1>{post?.title}</h1>
           </div>
-        </div>
-        <div style={{ marginTop: '15px' }}>
-          <ReactionBar postId={postId} />
+          <div id="image-divider">
+            <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
+          </div>
+          <div>
+            <div className="flex-col-tags" style={{ color: 'white' }}>
+              {post?.tags.map((tag) => (
+                <div className="small-tag"> #{tag.tag} </div>
+              ))}
+            </div>
+            <div style={{ marginTop: '15px' }}>
+              <ReactionBar postId={postId} />
+            </div>
+
+          </div>
+
         </div>
         <div className="post-row">
 
+          {/* ---go to the author page or my own profile?-- */}
           {user?.uid !== author?.uid ? (
             <Link passHref href={`/post/otherUsersPosts/${author.uid}`}>
               <div style={{ cursor: 'pointer' }}>
-                By: {author?.first_name} {author?.last_name}
+                {author?.first_name} {author?.last_name}
               </div>
             </Link>
           ) : (
             <Link passHref href="/userPosts">
-              <div style={{ cursor: 'pointer' }}>
-                By: {author?.first_name} {author?.last_name}
+              <div style={{ cursor: 'pointer', color: 'white' }}>
+                {author?.first_name} {author?.last_name}
               </div>
             </Link>
           )}
-          <div>
-            View Comments
-          </div> */}
+
         </div>
         <div className="post-content-post">
           <div className="posted-on-details" style={{ marginTop: '8px', display: 'flex' }}>
             posted on: {post?.publication_date}
           </div>
-          <div style={{ marginTop: '7px' }}>
+          <div style={{ marginTop: '7px', fontSize: '18pt', color: 'white' }}>
             View Comments
           </div>
           <div style={{ marginTop: '20px' }}>{post?.content}</div>
         </div>
       </div>
-
+      {/* ---end-of-center-of-page--- */}
+      <div>
+        {/* margin right */}
+      </div>
     </div>
   );
 }

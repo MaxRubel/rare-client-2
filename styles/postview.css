@@ -13,10 +13,9 @@
 .post-row {
     display: flex;
     width: 100%;
-    font-size: 20pt;
-    /* justify-content: space-evenly; */
+    font-size: 22pt;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .post-details {

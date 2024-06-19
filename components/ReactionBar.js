@@ -1,4 +1,3 @@
-
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -77,7 +76,7 @@ export default function ReactionBar({ postId }) {
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button className="clear-button" type="button" onClick={handleEmojiOpen}>
-          {emojiOpen ? closeEmojiIcon : addEmojiIcon }
+          {emojiOpen ? closeEmojiIcon : addEmojiIcon}
         </button>
         <button type="button" className="clear-button" onClick={handleCustomReactionOpen} style={{ paddingBottom: '4px' }}>
           {addCustomReaction}
