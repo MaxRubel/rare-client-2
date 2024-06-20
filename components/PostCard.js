@@ -12,7 +12,6 @@ import yoursEmoji from '../public/yoursEmoji.';
 
 function PostCard({ postObj, onUpdate }) {
   const { user } = useAuth();
-  console.log(postObj);
   const deleteThisPost = () => {
     if (window.confirm(`Delete ${postObj.title}?`)) {
       deletePost(postObj.id).then(() => onUpdate());
@@ -31,7 +30,7 @@ function PostCard({ postObj, onUpdate }) {
           {postObj.rare_user.uid === user.uid
          && (
          <div>
-           My Post! {yoursEmoji}
+           {yoursEmoji} My Post!
          </div>
          )}
         </div>
