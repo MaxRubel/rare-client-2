@@ -25,16 +25,32 @@ function PostCard({ postObj, onUpdate }) {
         <div />
         <div>
           <h2>{postObj.title} </h2>
+          <h5>By: {postObj.rare_user.first_name} {postObj.rare_user.last_name} </h5>
         </div>
         <div id="user-trophy" className="centered">
-          {postObj.rare_user.uid === user.uid && yoursEmoji}
+          {postObj.rare_user.uid === user.uid
+         && (
+         <div>
+           My Post! {yoursEmoji}
+         </div>
+         )}
         </div>
       </div>
       <div>
-        <h5>Publication Date: {postObj.publication_date}</h5>
+        <h6 style={{ fontSize: '12pt' }}>Published: {postObj.publication_date}</h6>
       </div>
-      <Card.Img src={postObj.image_url} alt={postObj.title} style={{ width: '200px', height: '200px' }} />
-      <Card.Body>
+      <Card.Img
+        src={postObj.image_url}
+        alt={postObj.title}
+        style={{ width: '200px', height: '200px', marginTop: '10px' }}
+      />
+      <Card.Body style={{
+        marginTop: '18px',
+        marginBottom: '12px',
+        display: 'flex',
+        gap: '15px',
+      }}
+      >
         {user.uid == postObj.rare_user?.uid ? (
           <>
             <Link href={`/post/edit/${postObj.id}`} passHref>
