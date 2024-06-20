@@ -20,6 +20,7 @@ const SearchBar = ({ setPostSearch, posts }) => {
     <div id="searchBar">
       <input
         placeholder="Search Posts"
+        className="form-control"
         onChange={handleChange}
       />
     </div>

@@ -20,8 +20,21 @@ function Home() {
   }, []);
 
   return (
-    <div className="mb-4">
-      <SearchBar setPostSearch={setPostSearch} postSearch={postSearch} posts={posts} />
+    <div
+      className="mb-4 centered"
+      style={{
+        flexDirection: 'column',
+        // backgroundColor: 'red',
+        gap: '10px',
+      }}
+    >
+      <div style={{ margin: '20px 0px' }}>
+        <SearchBar
+          setPostSearch={setPostSearch}
+          postSearch={postSearch}
+          posts={posts}
+        />
+      </div>
       <div>
         {postSearch.map((post) => (
           <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
