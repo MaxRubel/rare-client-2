@@ -27,8 +27,8 @@ export default function ReactionManager() {
 
   return (
     <div className="centered" style={{ flexDirection: 'column' }}>
-      <div style={{ marginTop: '25px' }}>
-        <div>
+      <div style={{ marginTop: '25px', backgroundColor: 'red' }}>
+        <div style={{ backgroundColor: 'red' }}>
           <ReactionForm onUpdate={onUpdate} key={key} />
         </div>
         <div>
@@ -39,7 +39,11 @@ export default function ReactionManager() {
       {/* ------ Custom Reactions Container ---- */}
       <div id="emoji-container" className="centered" style={{ flexDirection: 'column', marginTop: '20px' }}>
         <h3>Homemade Reactions</h3>
-        <div id="emoji-container" className="flex-box">
+        <div
+          id="emoji-container"
+          className="flex-box"
+          style={{ justifyContent: 'flex-start' }}
+        >
           {Array.isArray(reacts) && reacts.length > 0 && (
             reacts
               .filter((reaction) => reaction.label !== 'emoji')
@@ -51,9 +55,20 @@ export default function ReactionManager() {
       </div>
 
       {/* ------ Emoji Container ------*/}
-      <div id="emoji-container" className="centered" style={{ flexDirection: 'column', marginTop: '20px' }}>
+      <div
+        id="emoji-container"
+        className="centered"
+        style={{
+          flexDirection: 'column',
+          marginTop: '20px',
+        }}
+      >
         <h3>Emojis</h3>
-        <div id="emoji-container" className="flex-box">
+        <div
+          id="emoji-container"
+          className="flex-box"
+          style={{ justifyContent: 'flex-start' }}
+        >
           {Array.isArray(reacts) && reacts.length > 0 && (
             reacts
               .filter((reaction) => reaction.label === 'emoji')

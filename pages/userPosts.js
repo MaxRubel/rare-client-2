@@ -26,6 +26,8 @@ function UserPosts() {
         flexDirection: 'column',
         gap: '8px',
         justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '30px',
       }}
     >
       {posts.map((post) => (

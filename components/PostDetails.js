@@ -34,7 +34,6 @@ export default function PostDeatil({ postId }) {
           <div style={{
             color: 'white',
             padding: '9px',
-            textTransform: 'uppercase',
             textAlign: 'center',
           }}
           ><h1>{post?.title}</h1>
