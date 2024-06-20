@@ -20,12 +20,16 @@ function Home() {
   }, []);
 
   return (
+
     <div
-      className="mb-4 centered"
+      id="user-tours-cards"
+      className="d-flex flex-wrap"
       style={{
         flexDirection: 'column',
-        // backgroundColor: 'red',
-        gap: '10px',
+        gap: '8px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '30px',
       }}
     >
       <div style={{ margin: '20px 0px' }}>
@@ -35,11 +39,9 @@ function Home() {
           posts={posts}
         />
       </div>
-      <div>
-        {postSearch.map((post) => (
-          <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
-        ))}
-      </div>
+      {posts.map((post) => (
+        <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
+      ))}
     </div>
   );
 }
