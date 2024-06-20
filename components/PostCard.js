@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faTrashCan, faEye } from '@fortawesome/free-solid-svg-icons';
 import { deletePost } from '../api/postData';
 import { useAuth } from '../utils/data/authContext';
+import yoursEmoji from '../public/yoursEmoji.';
 
 function PostCard({ postObj, onUpdate }) {
   const { user } = useAuth();
-
+  console.log(postObj);
   const deleteThisPost = () => {
     if (window.confirm(`Delete ${postObj.title}?`)) {
       deletePost(postObj.id).then(() => onUpdate());
@@ -19,10 +20,16 @@ function PostCard({ postObj, onUpdate }) {
   };
 
   return (
-    <Card id="post-styling">
-      <Card.Title>
-        <h2>{postObj.title} </h2>
-      </Card.Title>
+    <div className="post-styling">
+      <div className="top-row_user-card">
+        <div />
+        <div>
+          <h2>{postObj.title} </h2>
+        </div>
+        <div id="user-trophy" className="centered">
+          {postObj.rare_user.uid === user.uid && yoursEmoji}
+        </div>
+      </div>
       <div>
         <h5>Publication Date: {postObj.publication_date}</h5>
       </div>
@@ -52,7 +59,7 @@ function PostCard({ postObj, onUpdate }) {
           </Link>
         )}
       </Card.Body>
-    </Card>
+    </div>
   );
 }
 

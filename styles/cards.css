@@ -1,0 +1,20 @@
+.post-styling {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 10px;
+  border: 1px solid white;
+  width: 600px;
+  min-width: 400px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.top-row_user-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  text-align: center;
+}

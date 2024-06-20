@@ -14,21 +14,24 @@ function UserPosts() {
 
   useEffect(() => {
     getAllPosts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
-      <div
-        id="user-tours-cards"
-        className="d-flex flex-wrap"
-        style={{ flexDirection: 'column', gap: '8px' }}
-      >
-        {posts.map((post) => (
-          <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
-        ))}
-      </div>
-    </>
+
+    <div
+      id="user-tours-cards"
+      className="d-flex flex-wrap"
+      style={{
+        flexDirection: 'column',
+        gap: '8px',
+        justifyContent: 'center',
+      }}
+    >
+      {posts.map((post) => (
+        <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
+      ))}
+    </div>
   );
 }
 
