@@ -5,6 +5,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
+// eslint-disable-next-line import/no-unresolved
 import EmojiPicker from 'emoji-picker-react';
 import { getReactionsOfPost, postEmoji } from '../api/postReactions';
 import { useAuth } from '../utils/data/authContext';

@@ -5,13 +5,21 @@ import { Image } from 'react-bootstrap';
 import { getSinglePost } from '../api/postData';
 import { getSingleUser } from '../api/users';
 import ReactionBar from './ReactionBar';
+import CommentCard from './CommentCard';
+import CommentForm from './forms/CommentForm';
+import { getCommentsOfPost } from '../api/comments';
 import { useAuth } from '../utils/data/authContext';
 
 // eslint-disable-next-line react/prop-types
 export default function PostDeatil({ postId }) {
   const [post, setPost] = useState(null);
   const [author, setAuthor] = useState({});
+  const [comments, setComments] = useState([]);
   const { user } = useAuth();
+
+  const getAllComments = () => {
+    getCommentsOfPost(postId).then((data) => setComments(data));
+  };
 
   useEffect(() => {
     getSinglePost(postId).then((data) => {
@@ -20,6 +28,7 @@ export default function PostDeatil({ postId }) {
         setAuthor(authorData);
       });
     });
+    getAllComments();
   }, [postId]);
 
   return (
@@ -50,9 +59,7 @@ export default function PostDeatil({ postId }) {
             <div style={{ marginTop: '15px' }}>
               <ReactionBar postId={postId} />
             </div>
-
           </div>
-
         </div>
         <div className="post-row">
 
@@ -76,15 +83,25 @@ export default function PostDeatil({ postId }) {
           <div className="posted-on-details" style={{ marginTop: '8px', display: 'flex' }}>
             posted on: {post?.publication_date}
           </div>
-          <div style={{ marginTop: '7px', fontSize: '18pt', color: 'white' }}>
-            View Comments
-          </div>
           <div style={{ marginTop: '20px' }}>{post?.content}</div>
         </div>
       </div>
       {/* ---end-of-center-of-page--- */}
       <div>
-        {/* margin right */}
+        <div className="post-comments">
+          <h2 className="post-comment-title">Comments</h2>
+          <CommentForm user={user} commentPostId={Number(postId)} onSubmit={getAllComments} />
+          {comments.map((comment) => (
+            <section key={`comment--${comment.id}`} className="view-comment">
+              <CommentCard
+                id={comment.id}
+                content={comment.content}
+                authorId={comment.author}
+                onUpdate={getAllComments}
+              />
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );
