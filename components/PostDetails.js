@@ -97,6 +97,7 @@ export default function PostDeatil({ postId }) {
                 id={comment.id}
                 content={comment.content}
                 authorId={comment.author}
+                author={comment.author}
                 onUpdate={getAllComments}
               />
             </section>
