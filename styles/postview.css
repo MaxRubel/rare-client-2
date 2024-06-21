@@ -39,3 +39,10 @@
 .posted-on-details {
     font-size: 14px;
 }
+
+.view-comments{
+    font-size: 18pt;
+    cursor: pointer;
+    margin-top: 15px;
+    color: white;
+}

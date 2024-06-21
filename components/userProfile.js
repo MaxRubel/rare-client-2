@@ -10,8 +10,6 @@ function ProfileCard({ userObj }) {
   const profileImageUrl = userObj.profile_image_url ? userObj.profile_image_url : 'https://lh3.googleusercontent.com/proxy/k13ownoZd1jRy2_rz1I0afpB9lbh2hWDJdm63i1xu11UlQ6dr37r190oCDRk6QdVtxeSxGJ4MQ-zzlxHiBxD3ZXwfxa7tZt79vn0Ajt8ZBltBTcFNhXnthq_Dc7k90DGZbZpiCw3t-oKvWnZBOIwyQUdNvjYzc_OdnFbvJTjM2XH';
   const router = useRouter();
 
-  console.log(userObj);
-
   const handleEditProfile = () => {
     router.push('/editProfile');
   };
