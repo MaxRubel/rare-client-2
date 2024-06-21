@@ -19,6 +19,8 @@ function AppNavBar() {
   const { oAuthUser, user } = useAuth();
   const router = useRouter();
 
+  console.log('user.is_staff', user.is_staff);
+
   const home = () => {
     router.push('/');
   };
@@ -69,7 +71,9 @@ function AppNavBar() {
                 </button>
                 <button type="button" className="nav-button" onClick={tagManager}>Tags</button>
                 <button type="button" className="nav-button" onClick={reactionManager}>Reactions</button>
-                <button type="button" className="nav-button" onClick={userManager}>Admin</button>
+                {user.is_staff ? (
+                  <button type="button" className="nav-button" onClick={userManager}>Admin</button>
+                ) : null}
               </div>
             ) : (
               ''
