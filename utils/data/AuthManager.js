@@ -20,7 +20,7 @@ const checkUser = (uid) =>
 
 const loginUser = (user) =>
   // eslint-disable-next-line implicit-arrow-linebreak
-  fetch('http://localhost:8088/login', {
+  fetch('http://localhost:8000/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const loginUser = (user) =>
   }).then((res) => res.json());
 
 const registerUser = (newUser) =>
-  fetch('http://localhost:8088/register', {
+  fetch('http://localhost:8000/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
