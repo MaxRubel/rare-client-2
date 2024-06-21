@@ -1,14 +1,38 @@
 const endpoint = 'http://localhost:8000';
 
 const getReactionsOfPost = (postId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/post_reactions/${postId}`, {
+  fetch(`${endpoint}/post_reactions/${postId}/get_reactions_of_post`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const postEmoji = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/post_reactions/post_emoji`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(() => resolve())
+    .catch(reject);
+});
+
+const postGif = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/post_reactions/post_gif`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(() => resolve())
     .catch(reject);
 });
 
@@ -49,5 +73,5 @@ const deletePostReaction = (id) => new Promise((resolve, reject) => {
 });
 
 export {
-  getReactionsOfPost, createPostReaction, getUserReactionsOfPost, deletePostReaction,
+  getReactionsOfPost, postEmoji, createPostReaction, getUserReactionsOfPost, deletePostReaction, postGif,
 };

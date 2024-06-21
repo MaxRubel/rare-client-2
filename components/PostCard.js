@@ -8,10 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faTrashCan, faEye } from '@fortawesome/free-solid-svg-icons';
 import { deletePost } from '../api/postData';
 import { useAuth } from '../utils/data/authContext';
+import yoursEmoji from '../public/yoursEmoji.';
 
 function PostCard({ postObj, onUpdate }) {
   const { user } = useAuth();
-
   const deleteThisPost = () => {
     if (window.confirm(`Delete ${postObj.title}?`)) {
       deletePost(postObj.id).then(() => onUpdate());
@@ -19,16 +19,38 @@ function PostCard({ postObj, onUpdate }) {
   };
 
   return (
-    <Card id="post-styling">
-      <Card.Title>
-        <h2>{postObj.title} </h2>
-      </Card.Title>
-      <div>
-        <h5>Publication Date: {postObj.publication_date}</h5>
+    <div className="post-styling">
+      <div className="top-row_user-card">
+        <div />
+        <div>
+          <h2>{postObj.title} </h2>
+          <h5>By: {postObj.rare_user.first_name} {postObj.rare_user.last_name} </h5>
+        </div>
+        <div id="user-trophy" className="centered">
+          {postObj.rare_user.uid === user.uid
+         && (
+         <div>
+           {yoursEmoji} My Post!
+         </div>
+         )}
+        </div>
       </div>
-      <Card.Img src={postObj.image_url} alt={postObj.title} style={{ width: '200px', height: '200px' }} />
-      <Card.Body>
-        {user.uid == postObj.rare_user.uid ? (
+      <div>
+        <h6 style={{ fontSize: '12pt' }}>Published: {postObj.publication_date}</h6>
+      </div>
+      <Card.Img
+        src={postObj.image_url}
+        alt={postObj.title}
+        style={{ width: '200px', height: '200px', marginTop: '10px' }}
+      />
+      <Card.Body style={{
+        marginTop: '18px',
+        marginBottom: '12px',
+        display: 'flex',
+        gap: '15px',
+      }}
+      >
+        {user.uid == postObj.rare_user?.uid ? (
           <>
             <Link href={`/post/edit/${postObj.id}`} passHref>
               <Button id="edit-btn">
@@ -52,7 +74,7 @@ function PostCard({ postObj, onUpdate }) {
           </Link>
         )}
       </Card.Body>
-    </Card>
+    </div>
   );
 }
 

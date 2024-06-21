@@ -31,6 +31,37 @@ body {
   align-items: center;
 }
 
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.clear-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  /* Fixed positioning */
+  top: -160px;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  /* Ensure it sits on top */
+}
+
 #edit-btn {
   background: none;
   border-color: #74C0FC;
@@ -52,13 +83,22 @@ body {
   color: #74C0FC;
 }
 
-.tag-card{
+.tag-card {
   padding: 5px 10px;
 }
 
-.flex-col-tags{
+.flex-col-tags {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px
+  flex-direction: row;
+  justify-content: left;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

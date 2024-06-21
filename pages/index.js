@@ -20,13 +20,28 @@ function Home() {
   }, []);
 
   return (
-    <div className="mb-4">
-      <SearchBar setPostSearch={setPostSearch} postSearch={postSearch} posts={posts} />
-      <div>
-        {postSearch.map((post) => (
-          <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
-        ))}
+
+    <div
+      id="user-tours-cards"
+      className="d-flex flex-wrap"
+      style={{
+        flexDirection: 'column',
+        gap: '8px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '30px',
+      }}
+    >
+      <div style={{ margin: '20px 0px' }}>
+        <SearchBar
+          setPostSearch={setPostSearch}
+          postSearch={postSearch}
+          posts={posts}
+        />
       </div>
+      {posts.map((post) => (
+        <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
+      ))}
     </div>
   );
 }

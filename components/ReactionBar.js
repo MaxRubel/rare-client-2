@@ -1,141 +1,127 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
+/* eslint-disable import/no-extraneous-dependencies */
+
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import {
-  createPostReaction, deletePostReaction, getReactionsOfPost, getUserReactionsOfPost,
-} from '../api/postReactions';
+// eslint-disable-next-line import/no-unresolved
+import EmojiPicker from 'emoji-picker-react';
+import { getReactionsOfPost, postEmoji } from '../api/postReactions';
+import { useAuth } from '../utils/data/authContext';
+import addEmojiIcon from '../public/addEmoji';
+import closeEmojiIcon from '../public/closeEmoji';
+import addCustomReaction from '../public/addCustomReaction';
+import CustomReactionPicker from './CustomReactionPicker';
+import ReactionCard from './utils/ReactionCard';
 
 export default function ReactionBar({ postId }) {
-  const [hasReacted, setHasReacted] = useState(false);
   const [update, setUpdate] = useState(0);
-  const [reactionNo, setReactionNo] = useState({
-    1: 0, 2: 0, 3: 0, 4: 0,
-  });
-  const userId = localStorage.getItem('auth_token');
-
-  const calculateReactions = (data) => {
-    setReactionNo({
-      1: 0, 2: 0, 3: 0, 4: 0,
-    });
-    for (let i = 0; i < data.length; i++) {
-      switch (data[i].reaction_id) {
-        case 1:
-          setReactionNo((prevState) => ({
-            ...prevState,
-            1: (prevState[1]) + 1,
-          }));
-          break;
-        case 2:
-          setReactionNo((prevState) => ({
-            ...prevState,
-            2: (prevState[2]) + 1,
-          }));
-          break;
-        case 3:
-          setReactionNo((prevState) => ({
-            ...prevState,
-            3: (prevState[3]) + 1,
-          }));
-          break;
-        case 4:
-          setReactionNo((prevState) => ({
-            ...prevState,
-            4: (prevState[4]) + 1,
-          }));
-          break;
-        default: break;
-      }
-    }
-  };
+  const [reactions, setReactions] = useState([]);
+  const [emojiOpen, setEmojiOpen] = useState(false);
+  const [customReactsOpen, setCustomReactsOpen] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
-    getReactionsOfPost(postId).then((data) => {
-      setHasReacted(data.some((item) => item.user_id === Number(userId)));
-      calculateReactions(data);
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [update, postId]);
+    getReactionsOfPost(postId).then(setReactions);
+  }, [postId, update]);
 
-  const handleMakeNewPostReaction = (reaction) => {
-    let reactionId;
-
-    switch (reaction) {
-      case 'love':
-        reactionId = 1;
-        break;
-      case 'mindblown':
-        reactionId = 2;
-        break;
-      case 'thinking':
-        reactionId = 3;
-        break;
-      case 'anger':
-        reactionId = 4;
-        break;
-      default:
-        reactionId = 0;
+  const handleEmojiOpen = () => {
+    if (!emojiOpen) {
+      setCustomReactsOpen(false);
     }
-
-    const payload = {
-      user_id: userId,
-      post_id: postId,
-      reaction_id: reactionId,
-    };
-
-    createPostReaction(payload).then(() => { setUpdate((preVal) => preVal + 1); });
+    setEmojiOpen((preVal) => !preVal);
   };
 
-  const handleClick = (reaction) => {
-    if (hasReacted) {
-      getUserReactionsOfPost(postId, userId).then((data) => {
-        deletePostReaction(data[0].id).then(() => {
-          handleMakeNewPostReaction(reaction);
-          setUpdate((preVal) => preVal + 1);
-        });
-      });
-    } else {
-      handleMakeNewPostReaction(reaction);
+  const updateReactionBar = () => {
+    setUpdate((preval) => preval + 1);
+    setEmojiOpen(false);
+    setCustomReactsOpen(false);
+  };
+
+  const handleEmojiClick = (e) => {
+    const payload = {
+      user_id: user.uid,
+      post_id: postId,
+      emoji: e.emoji,
+    };
+    postEmoji(payload).then(() => {
+      setUpdate((preval) => preval + 1);
+      setEmojiOpen((preVal) => !preVal);
+    });
+  };
+
+  const handleClickExitingEmoji = (emoji) => {
+    const payload = {
+      user_id: user.uid,
+      post_id: postId,
+      emoji,
+    };
+    postEmoji(payload).then(() => {
+      setUpdate((preval) => preval + 1);
+      if (emojiOpen) {
+        setEmojiOpen((preVal) => !preVal);
+      }
+    });
+  };
+
+  const handleCustomReactionOpen = () => {
+    if (emojiOpen) {
+      setEmojiOpen(false);
     }
+    setCustomReactsOpen((preVal) => !preVal);
   };
 
   return (
-    <div className="reactions-button">
-      <button
-        type="button"
-        className="reaction-button"
-        onClick={() => {
-          handleClick('love');
-        }}
-      >
-        😍 <div className="smol-text">{reactionNo[1]}</div>
-      </button>
-      <button
-        type="button"
-        className="reaction-button"
-        onClick={() => {
-          handleClick('mindblown');
-        }}
-      >
-        🤯 <div className="smol-text">{reactionNo[2]}</div>
-      </button>
-      <button
-        type="button"
-        className="reaction-button"
-        onClick={() => {
-          handleClick('thinking');
-        }}
-      >
-        🤔 <div className="smol-text">{reactionNo[3]}</div>
-      </button>
-      <button
-        type="button"
-        className="reaction-button"
-        onClick={() => {
-          handleClick('anger');
-        }}
-      >
-        🤬 <div className="smol-text">{reactionNo[4]}</div>
-      </button>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <button className="clear-button" type="button" onClick={handleEmojiOpen}>
+          {emojiOpen ? closeEmojiIcon : addEmojiIcon}
+        </button>
+        <button type="button" className="clear-button" onClick={handleCustomReactionOpen} style={{ paddingBottom: '4px' }}>
+          {addCustomReaction}
+        </button>
+
+        {reactions
+          .filter((reaction) => reaction.reaction.label === 'emoji')
+          .map((filteredReaction) => (
+            <div key={filteredReaction.reaction.id} className="centered" style={{ flexDirection: 'column' }}>
+              <button
+                className="clear-button"
+                type="button"
+                onClick={() => { handleClickExitingEmoji(filteredReaction.reaction.image_url); }}
+                style={{ fontSize: '30px' }}
+              >
+                {filteredReaction.reaction.image_url}
+              </button>
+              <div style={{ fontSize: '14px' }}>{filteredReaction.amount}</div>
+            </div>
+          ))}
+      </div>
+
+      <div id="gifs" style={{ display: 'flex', justifyContent: 'center', minHeight: '170px' }}>
+        {reactions
+          .filter((reaction) => reaction.reaction.label !== 'emoji')
+          .map((filteredReaction) => (
+            <div key={filteredReaction.reaction.id} className="centered" style={{ flexDirection: 'column' }}>
+              <button
+                className="clear-button"
+                type="button"
+                onClick={() => { handleClickExitingEmoji(filteredReaction.reaction.image_url); }}
+                style={{ fontSize: '30px', flexDirection: 'column' }}
+              >
+                <ReactionCard reaction={filteredReaction.reaction} />
+                <div style={{ fontSize: '14px' }}>{filteredReaction.amount}</div>
+              </button>
+            </div>
+          ))}
+      </div>
+
+      <div className="relative">
+        <div className="absolute"><EmojiPicker className="glass" onEmojiClick={handleEmojiClick} open={emojiOpen} /></div>
+        <div className="absolute"><CustomReactionPicker updateReactionBar={updateReactionBar} postId={postId} open={customReactsOpen} /></div>
+      </div>
     </div>
   );
 }

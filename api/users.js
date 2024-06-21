@@ -1,7 +1,7 @@
 const endppoint = 'http://localhost:8000';
 
-const getSingleUser = (id) => new Promise((resolve, reject) => {
-  fetch(`${endppoint}/users/${id}`, {
+const getSingleUser = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endppoint}/users/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

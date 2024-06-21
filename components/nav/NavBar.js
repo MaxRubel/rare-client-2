@@ -34,13 +34,15 @@ function AppNavBar() {
   const profilePage = () => {
     router.push('/profilePage');
   };
-
+  const reactionManager = () => {
+    router.push('/reactionManager');
+  };
   const userManager = () => {
     router.push('/userManager');
   };
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <div style={{ cursor: 'pointer' }}>
           <Image src={Logo} height="80px" width="80px" alt="Rare Logo" onClick={home} />
@@ -63,10 +65,11 @@ function AppNavBar() {
                 <button type="button" className="nav-button" onClick={userPosts}> My Posts </button>
                 <button type="button" className="nav-button" onClick={profilePage}>My Profile</button>
                 <button type="button" className="nav-button" onClick={catManager}>
-                  Category Manager
+                  Categories
                 </button>
-                <button type="button" className="nav-button" onClick={tagManager}>Tag Manager</button>
-                <button type="button" className="nav-button" onClick={userManager}>User Manager</button>
+                <button type="button" className="nav-button" onClick={tagManager}>Tags</button>
+                <button type="button" className="nav-button" onClick={reactionManager}>Reactions</button>
+                <button type="button" className="nav-button" onClick={userManager}>Admin</button>
               </div>
             ) : (
               ''

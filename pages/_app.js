@@ -4,6 +4,8 @@ import '../styles/forms.css';
 import '../styles/navbar.css';
 import '../styles/postview.css';
 import '../styles/categoryManager.css';
+import '../styles/customReactionPicker.css';
+import '../styles/cards.css';
 
 import ViewDirectorBasedOnUserAuthStatus from '../utils/data/ViewDirector';
 import { AuthProvider } from '../utils/data/authContext';
