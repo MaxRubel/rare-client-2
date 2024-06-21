@@ -7,10 +7,26 @@ import NewUserForm from '../../components/forms/NewUserForm';
 // eslint-disable-next-line no-unused-vars, react/prop-types
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
   const { user, userLoading, oAuthUser } = useAuth();
+
   // if user state is null, then show loader
 
   if (userLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (oAuthUser && user?.active === false) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        textAlign: 'center',
+      }}
+      >
+        <h1 style={{ color: 'red' }}>Sorry, your account has been disabled. Please contact an administrator for more information.</h1>
+      </div>
+    );
   }
 
   // what the user should see if they are logged in
