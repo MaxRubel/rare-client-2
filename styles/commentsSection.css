@@ -7,3 +7,40 @@
     grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
+
+.post-comment-title{
+    margin-top: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+.post-comments{
+    margin-top: 20px;
+}
+
+.comment-form-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+
+.comment-card{
+    margin-top: 23px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.comment-card-title{
+    text-align: left;
+}
+
+.comments--profile-image{
+    border-radius: 100%;
+    width: 70px;
+    height: 50px;
+}
+
+.comment-content{
+    margin-bottom: 20px;
+}
