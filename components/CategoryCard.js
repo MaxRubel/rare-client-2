@@ -8,12 +8,14 @@ import {
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { useAuth } from '../utils/data/authContext';
 
 import { deleteCategory, updateCategory } from '../api/categories';
 
 export default function CategoryCard({ cat, onUpdate }) {
   const [label, setLabel] = useState(cat.label);
   const [showModal, setShowModal] = useState(false);
+  const { user } = useAuth();
 
   const handleEdit = () => {
     setShowModal(true);
@@ -48,12 +50,16 @@ export default function CategoryCard({ cat, onUpdate }) {
   return (
     <Card style={{ padding: '10px', margin: '10px' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Button variant="link" onClick={handleEdit}>
-          <AiFillEdit /> {/* Edit icon */}
-        </Button>
-        <Button variant="link" onClick={handleDelete}>
-          <AiFillDelete /> {/* Delete icon */}
-        </Button>
+        {user && user.is_staff ? (
+          <>
+            <Button variant="link" onClick={handleEdit}>
+              <AiFillEdit /> {/* Edit icon */}
+            </Button>
+            <Button variant="link" onClick={handleDelete}>
+              <AiFillDelete /> {/* Delete icon */}
+            </Button>
+          </>
+        ) : null}
         <Link passHref href="/">
           {cat.label}
         </Link>
