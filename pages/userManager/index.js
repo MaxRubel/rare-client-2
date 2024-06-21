@@ -28,7 +28,7 @@ function UserManager() {
         }}
       >
         {users.map((user) => (
-          <UserCard key={user.id} user={user} onUpdate={onUpdate} />
+          <UserCard key={user.id} userObject={user} onUpdate={onUpdate} />
         ))}
       </div>
     </div>
