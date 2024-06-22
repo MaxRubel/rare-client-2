@@ -130,7 +130,7 @@ export default function PostDeatil({ postId }) {
           <div className="posted-on-details" style={{ marginTop: '8px', display: 'flex' }}>
             posted on: {post?.publication_date}
           </div>
-          <div style={{ marginTop: '20px' }}>{post?.content}</div>
+          <div style={{ marginTop: '20px', whiteSpace: 'pre-wrap' }}>{post?.content}</div>
           <div id="comments-section" className="post-comments">
             <h2 className="post-comment-title">Comments</h2>
             <CommentForm user={user} commentPostId={Number(postId)} onSubmit={getAllComments} />
