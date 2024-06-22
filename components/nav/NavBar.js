@@ -19,8 +19,6 @@ function AppNavBar() {
   const { oAuthUser, user } = useAuth();
   const router = useRouter();
 
-  console.log('user.is_staff', user.is_staff);
-
   const home = () => {
     router.push('/');
   };

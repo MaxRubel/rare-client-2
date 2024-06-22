@@ -30,6 +30,7 @@ function UserPosts() {
         marginTop: '30px',
       }}
     >
+      {posts.length === 0 && 'You have not posted yet...'}
       {posts.map((post) => (
         <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
       ))}
