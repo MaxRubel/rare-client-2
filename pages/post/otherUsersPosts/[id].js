@@ -4,16 +4,16 @@ import { Button, Card, Image } from 'react-bootstrap';
 import PostCard from '../../../components/PostCard';
 import { getPostByUserId } from '../../../api/postData';
 import { getSingleUser } from '../../../api/users';
-
+import { amISubscribed, createSubscription, deleteSubscription } from '../../../api/subscriptions';
 import { useAuth } from '../../../utils/data/authContext';
+import peopleIcon from '../../../public/peopleIcon';
 // eslint-disable-next-line import/no-named-as-default
-import amISubscribed from '../../../api/subscriptions';
 
 export default function GetOtherUsersPosts() {
   const [posts, setPosts] = useState([]);
   const [author, setAuthor] = useState({});
   const [isSubscribed, setIsSubscribed] = useState(null);
-  // const [subscription, setSubscription] = useState(null);
+  const [update, setUpdate] = useState(0);
   const router = useRouter();
   const { id } = router.query;
 
@@ -41,7 +41,7 @@ export default function GetOtherUsersPosts() {
     getOtherUser();
     getAllPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
 
   const handleSubscribe = () => {
     // eslint-disable-next-line no-unused-vars
@@ -51,20 +51,34 @@ export default function GetOtherUsersPosts() {
     };
 
     if (isSubscribed) {
-      // delete subscription
+      deleteSubscription(payload);
     } else {
-      // create subscription
+      createSubscription(payload).then();
     }
+    setUpdate((preval) => preval + 1);
   };
 
   return (
     <>
       <div className="user-profile-container">
-        <div style={{ margin: '20px 0px' }}>
+        {/* ---sub--row--- */}
+        <div style={{
+          margin: '20px 0px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+        }}
+        >
+          <div />
           <Button type="button" onClick={handleSubscribe}>
             {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
           </Button>
+          {isSubscribed && (
+            <div style={{ padding: '0px 50px' }}>
+              {peopleIcon} You are subscribed!
+            </div>
+          )}
         </div>
+
         <Card style={{ width: '30rem', margin: '10px' }}>
           <Card.Body>
             <Image
@@ -90,6 +104,7 @@ export default function GetOtherUsersPosts() {
           gap: '8px',
         }}
       >
+        <div className="other-user-posts-header"><h3>Posts:</h3></div>
         {posts?.map((post) => (
           <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} setAuthor={setAuthor} />
         ))}

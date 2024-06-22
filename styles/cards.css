@@ -1,8 +1,8 @@
 .post-styling {
-  background-color: transparent;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: black;
   gap: 1px;
   border: 1px solid white;
   width: 80%;
@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
+  border-radius: 1%;
 }
 
 .top-row_user-card {
