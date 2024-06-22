@@ -28,7 +28,7 @@ const CommentForm = ({
         content: obj.content,
       });
     }
-  }, [obj, user]);
+  }, [obj, user, commentPostId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,10 +67,28 @@ const CommentForm = ({
   return (
     <>
       <Form onSubmit={handleSubmit} className="comment-form-cont">
-        <input type="text" name="content" className="input" placeholder="leave a comment" required value={currentComment.content} onChange={handleChange} />
-        <Button className="edit-btn btn-dark" variant="primary" type="submit">
-          Submit
-        </Button>
+        <div style={{}}>
+          <textarea
+            type="text"
+            name="content"
+            className="input"
+            placeholder="Leave a comment..."
+            required
+            value={currentComment.content}
+            onChange={handleChange}
+            style={{ width: '100%' }}
+          />
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <Button
+            className="edit-btn btn-dark"
+            variant="primary"
+            type="submit"
+            style={{ width: '350px', border: '1px solid white' }}
+          >
+            Submit
+          </Button>
+        </div>
       </Form>
     </>
   );

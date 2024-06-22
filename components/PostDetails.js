@@ -82,7 +82,11 @@ export default function PostDeatil({ postId }) {
           ><h1>{post?.title}</h1>
           </div>
           <div id="image-divider">
-            <Image src={post?.image_url} alt="Post image" style={{ maxWidth: '800px' }} />
+            <Image
+              src={post?.image_url}
+              alt="Post image"
+              style={{ maxWidth: '800px' }}
+            />
           </div>
           <div>
             <div className="flex-col-tags" style={{ color: 'white' }}>
@@ -118,33 +122,35 @@ export default function PostDeatil({ postId }) {
               <Button onClick={createSub}>Subscribe</Button>
             )
           )}
-
         </div>
         <div className="post-content-post">
+          <div className="view-comments">
+            <Link href="#comments-section">View Comments</Link>
+          </div>
           <div className="posted-on-details" style={{ marginTop: '8px', display: 'flex' }}>
             posted on: {post?.publication_date}
           </div>
           <div style={{ marginTop: '20px' }}>{post?.content}</div>
+          <div id="comments-section" className="post-comments">
+            <h2 className="post-comment-title">Comments</h2>
+            <CommentForm user={user} commentPostId={Number(postId)} onSubmit={getAllComments} />
+            {comments.map((comment) => (
+              <section key={`comment--${comment.id}`} className="view-comment">
+                <CommentCard
+                  id={comment.id}
+                  content={comment.content}
+                  authorId={comment.author}
+                  author={comment.author}
+                  published={comment.created_on}
+                  onUpdate={getAllComments}
+                />
+              </section>
+            ))}
+          </div>
         </div>
       </div>
       {/* ---end-of-center-of-page--- */}
-      <div>
-        <div className="post-comments">
-          <h2 className="post-comment-title">Comments</h2>
-          <CommentForm user={user} commentPostId={Number(postId)} onSubmit={getAllComments} />
-          {comments.map((comment) => (
-            <section key={`comment--${comment.id}`} className="view-comment">
-              <CommentCard
-                id={comment.id}
-                content={comment.content}
-                authorId={comment.author}
-                author={comment.author}
-                onUpdate={getAllComments}
-              />
-            </section>
-          ))}
-        </div>
-      </div>
+      <div />
     </div>
   );
 }

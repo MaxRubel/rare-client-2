@@ -5,6 +5,7 @@ import '../styles/navbar.css';
 import '../styles/postview.css';
 import '../styles/categoryManager.css';
 import '../styles/customReactionPicker.css';
+import '../styles/commentsSection.css';
 import '../styles/cards.css';
 
 import ViewDirectorBasedOnUserAuthStatus from '../utils/data/ViewDirector';
