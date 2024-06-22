@@ -15,7 +15,6 @@ const SearchBar = ({ setPostSearch, posts }) => {
     });
     setPostSearch(filteredPosts);
   };
-
   return (
     <div id="searchBar">
       <input

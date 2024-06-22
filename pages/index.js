@@ -17,7 +17,7 @@ function Home() {
 
   useEffect(() => {
     getEveryPosts();
-  }, []);
+  }, [posts]);
 
   return (
 
@@ -39,7 +39,7 @@ function Home() {
           posts={posts}
         />
       </div>
-      {posts.map((post) => (
+      {postSearch.map((post) => (
         <PostCard key={post.id} postObj={post} onUpdate={getAllPosts} />
       ))}
     </div>
