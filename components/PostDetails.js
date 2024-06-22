@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { getSinglePost } from '../api/postData';
 import { getSingleUser } from '../api/users';
 import ReactionBar from './ReactionBar';
@@ -9,16 +9,49 @@ import CommentCard from './CommentCard';
 import CommentForm from './forms/CommentForm';
 import { getCommentsOfPost } from '../api/comments';
 import { useAuth } from '../utils/data/authContext';
+import { checkSubscribed, subToUser, unsubFromUser } from '../api/subs';
 
 // eslint-disable-next-line react/prop-types
 export default function PostDeatil({ postId }) {
   const [post, setPost] = useState(null);
   const [author, setAuthor] = useState({});
   const [comments, setComments] = useState([]);
+  const [isSubbed, setIsSubbed] = useState(null);
+  const [update, setUpdate] = useState(0);
   const { user } = useAuth();
+
+  const onUpdate = () => {
+    setUpdate((preVal) => preVal + 1);
+  };
 
   const getAllComments = () => {
     getCommentsOfPost(postId).then((data) => setComments(data));
+  };
+
+  const subCheck = (authorData) => {
+    const payload = {
+      uid: user.uid,
+      author_id: authorData.id,
+    };
+    checkSubscribed(payload).then((data) => {
+      setIsSubbed(data.is_subscribed);
+    });
+  };
+
+  const createSub = () => {
+    const payload = {
+      uid: user.uid,
+      author_id: author.id,
+    };
+    subToUser(payload).then(onUpdate);
+  };
+
+  const delSub = () => {
+    const payload = {
+      uid: user.uid,
+      author_id: author.id,
+    };
+    unsubFromUser(payload).then(onUpdate);
   };
 
   useEffect(() => {
@@ -26,10 +59,11 @@ export default function PostDeatil({ postId }) {
       setPost(data);
       getSingleUser(data.rare_user.uid).then((authorData) => {
         setAuthor(authorData);
+        subCheck(authorData);
       });
     });
     getAllComments();
-  }, [postId]);
+  }, [postId, update]);
 
   return (
     <div className="post-container">
@@ -80,6 +114,13 @@ export default function PostDeatil({ postId }) {
                 {author?.first_name} {author?.last_name}
               </div>
             </Link>
+          )}
+          {user?.uid !== author?.uid && (
+            isSubbed ? (
+              <Button onClick={delSub}>Unsub</Button>
+            ) : (
+              <Button onClick={createSub}>Subscribe</Button>
+            )
           )}
         </div>
         <div className="post-content-post">
