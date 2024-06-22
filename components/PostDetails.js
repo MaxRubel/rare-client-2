@@ -117,9 +117,9 @@ export default function PostDeatil({ postId }) {
           )}
           {user?.uid !== author?.uid && (
             isSubbed ? (
-              <Button onClick={delSub}>Unsub</Button>
+              <Button className="clear-button" onClick={delSub}>Unsubscribe</Button>
             ) : (
-              <Button onClick={createSub}>Subscribe</Button>
+              <Button className="clear-button" onClick={createSub}>Subscribe</Button>
             )
           )}
         </div>
